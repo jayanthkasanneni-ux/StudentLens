@@ -2855,6 +2855,56 @@ async function getSupabaseUser() {
     }
 }
 
+function getAuthRedirectUrl() {
+    try {
+        const currentUrl = new URL(window.location.href);
+        const redirectUrl = new URL("dashboard.html", currentUrl);
+        return redirectUrl.toString();
+    } catch (error) {
+        const baseOrigin =
+            window.location.origin &&
+                window.location.origin !== "null"
+                ? window.location.origin
+                : "";
+
+        return baseOrigin
+            ? `${baseOrigin}/pages/dashboard.html`
+            : "/pages/dashboard.html";
+    }
+}
+
+async function signInWithGitHub() {
+    if (
+        typeof window.supabaseClient === "undefined" ||
+        !window.supabaseClient
+    ) {
+        throw new Error(
+            "Supabase is not configured correctly. Check supabase-config.js."
+        );
+    }
+
+    const redirectTo = getAuthRedirectUrl();
+
+    const { data, error } = await window.supabaseClient.auth.signInWithOAuth({
+        provider: "github",
+        options: {
+            redirectTo: redirectTo
+        }
+    });
+
+    if (error) {
+        throw error;
+    }
+
+    if (data && data.url) {
+        window.location.href = data.url;
+    }
+
+    return data;
+}
+
+window.signInWithGitHub = signInWithGitHub;
+
 
 // ============================================
 // REQUIRE LOGIN

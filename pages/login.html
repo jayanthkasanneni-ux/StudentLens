@@ -156,6 +156,59 @@
             color: #b91c1c;
         }
 
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0 8px;
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .github-auth-button {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border: 1px solid #0f172a;
+            border-radius: 10px;
+            background: #0f172a;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .github-auth-button:hover {
+            background: #111827;
+            transform: translateY(-1px);
+        }
+
+        .github-auth-button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+            transform: none;
+        }
+
+        .github-auth-button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
         .signup-text {
             margin-top: 24px;
             color: #64748b;
@@ -373,6 +426,23 @@
 
                     </button>
 
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="githubLoginButton"
+                        class="github-auth-button"
+                        aria-label="Sign in with GitHub">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.55v-2.12c-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.28-1.67-1.28-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.18-1.48 3.13-1.17 3.13-1.17.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.06.79 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+                        </svg>
+
+                        <span>GitHub</span>
+
+                    </button>
 
                 </form>
 
@@ -506,6 +576,9 @@
             const loginButton =
                 document.getElementById("loginButton");
 
+            const githubLoginButton =
+                document.getElementById("githubLoginButton");
+
 
             if (!loginForm) {
                 return;
@@ -579,6 +652,36 @@
 
             }
 
+
+            if (githubLoginButton) {
+                githubLoginButton.addEventListener("click", async function () {
+                    const originalLabel = githubLoginButton.innerHTML;
+
+                    githubLoginButton.disabled = true;
+                    githubLoginButton.innerHTML = `
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.9.58.11.79-.25.79-.55v-2.12c-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.28-1.67-1.28-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.18-1.48 3.13-1.17 3.13-1.17.63 1.58.24 2.75.12 3.04.74.8 1.18 1.82 1.18 3.08 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.06.79 2.14v3.17c0 .3.21.66.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+                        </svg>
+                        <span>Redirecting...</span>
+                    `;
+
+                    showLoginMessage("Redirecting to GitHub for sign in...", "success");
+
+                    try {
+                        await window.signInWithGitHub();
+                    } catch (error) {
+                        console.error("GitHub login error:", error);
+                        showLoginMessage(
+                            error && error.message
+                                ? error.message
+                                : "Unable to sign in with GitHub. Please try again.",
+                            "error"
+                        );
+                        githubLoginButton.disabled = false;
+                        githubLoginButton.innerHTML = originalLabel;
+                    }
+                });
+            }
 
             loginForm.addEventListener(
                 "submit",
