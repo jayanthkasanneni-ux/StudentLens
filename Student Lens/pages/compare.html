@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Compare colleges on StudentLens using fees, ratings, placements, courses, and other important information.">
+
+    <title>Compare Colleges | StudentLens</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+        /* =========================================
+           COMPARE PAGE ENHANCEMENTS
+           ========================================= */
+
+        .compare-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 24px 70px;
+        }
+
+        .compare-selection-section {
+            width: 100%;
+        }
+
+        .compare-selection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .compare-selection-card {
+            padding: 28px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+            transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .compare-selection-card:hover {
+            border-color: #bfdbfe;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+        }
+
+        .selection-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .selection-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .selection-card-header h3 {
+            margin: 0 0 5px;
+            color: #0f172a;
+            font-size: 20px;
+        }
+
+        .selection-card-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .compare-selection-card label {
+            display: block;
+            margin-bottom: 9px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .college-select {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #0f172a;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .college-select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .compare-action-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .compare-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-width: 220px;
+            min-height: 50px;
+            padding: 13px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .compare-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .compare-helper-text {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .comparison-result-section {
+            margin-top: 60px;
+            scroll-margin-top: 30px;
+        }
+
+        .comparison-heading {
+            margin-bottom: 28px;
+        }
+
+        .comparison-result-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .comparison-result-container table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .comparison-result-container th,
+        .comparison-result-container td {
+            padding: 17px 18px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .comparison-result-container th {
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .comparison-result-container td {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .comparison-result-container tr:last-child th,
+        .comparison-result-container tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-result-container tr:hover td {
+            background: #f8fbff;
+        }
+
+        .comparison-result-container button {
+            min-height: 40px;
+            padding: 9px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #2563eb;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .comparison-result-container button:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
+        .compare-information-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 34px;
+        }
+
+        .compare-information-card {
+            padding: 22px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .compare-information-card h3 {
+            margin: 0 0 8px;
+            color: #0f172a;
+            font-size: 16px;
+        }
+
+        .compare-information-card p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .compare-bottom-section {
+            margin-top: 10px;
+        }
+
+        .comparison-empty-message {
+            padding: 35px 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #ffffff;
+            color: #64748b;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+
+            .compare-selection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .compare-information-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .compare-main {
+                padding: 35px 16px 50px;
+            }
+
+            .compare-selection-card {
+                padding: 22px;
+            }
+
+            .selection-card-header h3 {
+                font-size: 18px;
+            }
+
+            .compare-button {
+                width: 100%;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+         ========================================= -->
+
+    <nav class="main-navbar">
+
+        <div class="logo">
+
+            <a href="../index.html" class="logo-link">
+
+                <span class="logo-icon" aria-hidden="true">
+
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                        <path d="M3 9L12 4L21 9L12 14L3 9Z" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+
+                        <path d="M6 11.2V16C9.4 19 14.6 19 18 16V11.2" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+
+                        <path d="M21 9V15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html" class="active">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html">
+                AI Advisor
+            </a>
+
+            <a href="saved-colleges.html">
+                Saved Colleges
+            </a>
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="nav-login login-link">
+                Login
+            </a>
+
+            <a href="signup.html" class="nav-signup nav-button">
+                Get Started
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         PAGE HERO
+         ========================================= -->
+
+    <header class="page-hero compare-page-hero">
+
+        <div class="page-hero-content">
+
+            <span class="section-label">
+                COLLEGE COMPARISON
+            </span>
+
+            <h1>
+                Compare Colleges
+                <span>With Confidence</span>
+            </h1>
+
+            <p>
+                Compare college details, fees, placements,
+                ratings, and other important information
+                before making your decision.
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+         ========================================= -->
+
+    <main class="compare-main">
+
+
+        <!-- COLLEGE SELECTION -->
+
+        <section class="compare-selection-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    GET STARTED
+                </span>
+
+                <h2>
+                    Select Two Colleges
+                </h2>
+
+                <p>
+                    Choose two colleges to view their details
+                    side by side.
+                </p>
+
+            </div>
+
+
+
+            <div class="compare-selection-grid">
+
+
+                <!-- FIRST COLLEGE -->
+
+                <div class="compare-selection-card">
+
+                    <div class="selection-card-header">
+
+                        <div class="selection-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                First College
+                            </h3>
+
+                            <p>
+                                Select your first college
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label for="collegeOne">
+                        College 1
+                    </label>
+
+                    <select id="collegeOne" class="college-select" aria-label="Select first college">
+
+                        <option value="">
+                            Select College
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SECOND COLLEGE -->
+
+                <div class="compare-selection-card">
+
+                    <div class="selection-card-header">
+
+                        <div class="selection-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Second College
+                            </h3>
+
+                            <p>
+                                Select your second college
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label for="collegeTwo">
+                        College 2
+                    </label>
+
+                    <select id="collegeTwo" class="college-select" aria-label="Select second college">
+
+                        <option value="">
+                            Select College
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- COMPARE ACTION -->
+
+            <div class="compare-action-area">
+
+                <button type="button" class="primary compare-button" onclick="compareSelectedColleges()">
+
+                    <span>
+                        Compare Colleges
+                    </span>
+
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+
+                        <path d="M8 7H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+                        <path d="M8 17H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+                        <path d="M3 7H3.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+
+                        <path d="M3 17H3.01" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+
+                        <path d="M14 4L17 7L14 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+
+                        <path d="M10 14L7 17L10 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+
+                    </svg>
+
+                </button>
+
+
+                <p class="compare-helper-text">
+                    Select two different colleges to continue.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             COMPARISON RESULT SECTION
+             ========================================= -->
+
+        <section class="comparison-result-section" id="comparisonSection" style="display: none;" aria-live="polite">
+
+            <div class="section-heading comparison-heading">
+
+                <span class="section-label">
+                    COMPARISON RESULTS
+                </span>
+
+                <h2>
+                    College Comparison
+                </h2>
+
+                <p>
+                    Review the selected colleges side by side.
+                </p>
+
+            </div>
+
+
+            <div id="comparisonResult" class="comparison-result-container">
+
+                <!-- Comparison results are generated by JavaScript -->
+
+            </div>
+
+
+            <!-- COMPARISON GUIDANCE -->
+
+            <div class="compare-information-grid">
+
+                <div class="compare-information-card">
+
+                    <h3>
+                        Compare Fees
+                    </h3>
+
+                    <p>
+                        Review the available fee information
+                        and consider your education budget.
+                    </p>
+
+                </div>
+
+
+                <div class="compare-information-card">
+
+                    <h3>
+                        Review Placements
+                    </h3>
+
+                    <p>
+                        Check placement-related information
+                        before making your final decision.
+                    </p>
+
+                </div>
+
+
+                <div class="compare-information-card">
+
+                    <h3>
+                        Check Course Options
+                    </h3>
+
+                    <p>
+                        Compare available courses and select
+                        an option that matches your interests.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         BOTTOM CTA
+         ========================================= -->
+
+    <section class="bottom compare-bottom-section">
+
+        <div class="bottom-content">
+
+            <span class="section-label bottom-label">
+                MAKE AN INFORMED DECISION
+            </span>
+
+            <h2>
+                Compare. Discover. Decide.
+            </h2>
+
+            <p>
+                StudentLens helps you explore your options
+                and understand important college information.
+            </p>
+
+            <a href="colleges.html" class="primary bottom-button">
+                Explore Colleges
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../script.js"></script>
+    <script>
+
+        let allCompareColleges = [];
+
+
+        /* =====================================================
+           PAGE INITIALIZATION
+           ===================================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                if (typeof updateAuthenticationUI === "function") {
+                    await updateAuthenticationUI();
+                }
+
+                loadCompareColleges();
+
+            }
+        );
+
+
+        /* =====================================================
+           LOAD COLLEGES INTO DROPDOWNS
+           ===================================================== */
+
+        async function loadCompareColleges() {
+
+            const collegeOne =
+                document.getElementById("collegeOne");
+
+            const collegeTwo =
+                document.getElementById("collegeTwo");
+
+
+            try {
+
+                const response =
+                    await fetch("../data/colleges.json");
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load college data."
+                    );
+
+                }
+
+
+                allCompareColleges =
+                    await response.json();
+
+
+                if (!Array.isArray(allCompareColleges)) {
+
+                    throw new Error(
+                        "Invalid college data format."
+                    );
+
+                }
+
+
+                allCompareColleges.forEach(
+                    function (college) {
+
+                        const collegeId =
+                            String(college.id);
+
+                        const collegeName =
+                            college.name ||
+                            "Unnamed College";
+
+
+                        const optionOne =
+                            document.createElement(
+                                "option"
+                            );
+
+                        optionOne.value =
+                            collegeId;
+
+                        optionOne.textContent =
+                            collegeName;
+
+                        collegeOne.appendChild(
+                            optionOne
+                        );
+
+
+                        const optionTwo =
+                            document.createElement(
+                                "option"
+                            );
+
+                        optionTwo.value =
+                            collegeId;
+
+                        optionTwo.textContent =
+                            collegeName;
+
+                        collegeTwo.appendChild(
+                            optionTwo
+                        );
+
+                    }
+                );
+
+
+                loadSavedComparisonSelection();
+
+
+            } catch (error) {
+
+                console.error(
+                    "College loading error:",
+                    error
+                );
+
+
+                collegeOne.innerHTML =
+                    `
+                    <option value="">
+                        Unable to load colleges
+                    </option>
+                    `;
+
+
+                collegeTwo.innerHTML =
+                    `
+                    <option value="">
+                        Unable to load colleges
+                    </option>
+                    `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOAD SAVED COMPARISON SELECTION
+           ===================================================== */
+
+        function loadSavedComparisonSelection() {
+
+            let comparisonIds = [];
+
+
+            try {
+
+                comparisonIds =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "studentLensCompareColleges"
+                        ) || "[]"
+                    );
+
+
+            } catch (error) {
+
+                comparisonIds = [];
+
+            }
+
+
+            if (
+                !Array.isArray(comparisonIds) ||
+                comparisonIds.length < 2
+            ) {
+
+                return;
+
+            }
+
+
+            const collegeOne =
+                document.getElementById(
+                    "collegeOne"
+                );
+
+
+            const collegeTwo =
+                document.getElementById(
+                    "collegeTwo"
+                );
+
+
+            collegeOne.value =
+                String(comparisonIds[0]);
+
+
+            collegeTwo.value =
+                String(comparisonIds[1]);
+
+
+            compareSelectedColleges();
+
+        }
+
+
+        /* =====================================================
+           COMPARE SELECTED COLLEGES
+           ===================================================== */
+
+        function compareSelectedColleges() {
+
+            const collegeOne =
+                document.getElementById(
+                    "collegeOne"
+                ).value;
+
+
+            const collegeTwo =
+                document.getElementById(
+                    "collegeTwo"
+                ).value;
+
+
+            const resultSection =
+                document.getElementById(
+                    "comparisonSection"
+                );
+
+
+            const resultContainer =
+                document.getElementById(
+                    "comparisonResult"
+                );
+
+
+            if (!collegeOne || !collegeTwo) {
+
+                alert(
+                    "Please select both colleges."
+                );
+
+                return;
+
+            }
+
+
+            if (collegeOne === collegeTwo) {
+
+                alert(
+                    "Please select two different colleges."
+                );
+
+                return;
+
+            }
+
+
+            const firstCollege =
+                allCompareColleges.find(
+                    function (college) {
+
+                        return String(college.id) ===
+                            String(collegeOne);
+
+                    }
+                );
+
+
+            const secondCollege =
+                allCompareColleges.find(
+                    function (college) {
+
+                        return String(college.id) ===
+                            String(collegeTwo);
+
+                    }
+                );
+
+
+            if (!firstCollege || !secondCollege) {
+
+                alert(
+                    "Unable to find the selected colleges."
+                );
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "studentLensCompareColleges",
+                JSON.stringify(
+                    [
+                        String(firstCollege.id),
+                        String(secondCollege.id)
+                    ]
+                )
+            );
+
+
+            renderComparisonTable(
+                firstCollege,
+                secondCollege
+            );
+
+
+            resultSection.style.display =
+                "block";
+
+
+            resultSection.scrollIntoView(
+                {
+                    behavior: "smooth",
+                    block: "start"
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           RENDER COMPARISON TABLE
+           ===================================================== */
+
+        function renderComparisonTable(
+            firstCollege,
+            secondCollege
+        ) {
+
+            const resultContainer =
+                document.getElementById(
+                    "comparisonResult"
+                );
+
+
+            const comparisonFields = [
+
+                {
+                    label: "College Name",
+                    key: "name"
+                },
+
+                {
+                    label: "Location",
+                    key: "location"
+                },
+
+                {
+                    label: "Type",
+                    key: "type"
+                },
+
+                {
+                    label: "Rating",
+                    key: "rating"
+                },
+
+                {
+                    label: "Fees",
+                    key: "fees"
+                },
+
+                {
+                    label: "Placement",
+                    key: "placement"
+                },
+
+                {
+                    label: "Courses",
+                    key: "courses"
+                }
+
+            ];
+
+
+            let tableHTML = `
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Feature
+                            </th>
+
+                            <th>
+
+                                ${escapeCompareHTML(
+                firstCollege.name ||
+                "First College"
+            )}
+
+                                <br><br>
+
+                                <button
+                                    type="button"
+                                    onclick="removeCollegeFromComparison(
+                                        '${escapeCompareHTML(
+                String(
+                    firstCollege.id
+                )
+            )}'
+                                    )"
+                                >
+                                    Remove
+                                </button>
+
+                            </th>
+
+                            <th>
+
+                                ${escapeCompareHTML(
+                secondCollege.name ||
+                "Second College"
+            )}
+
+                                <br><br>
+
+                                <button
+                                    type="button"
+                                    onclick="removeCollegeFromComparison(
+                                        '${escapeCompareHTML(
+                String(
+                    secondCollege.id
+                )
+            )}'
+                                    )"
+                                >
+                                    Remove
+                                </button>
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+            `;
+
+
+            comparisonFields.forEach(
+                function (field) {
+
+                    let firstValue =
+                        firstCollege[field.key];
+
+
+                    let secondValue =
+                        secondCollege[field.key];
+
+
+                    if (field.key === "courses") {
+
+                        firstValue =
+                            formatCourses(firstValue);
+
+
+                        secondValue =
+                            formatCourses(secondValue);
+
+                    }
+
+
+                    if (
+                        firstValue === undefined ||
+                        firstValue === null ||
+                        firstValue === ""
+                    ) {
+
+                        firstValue =
+                            "Not available";
+
+                    }
+
+
+                    if (
+                        secondValue === undefined ||
+                        secondValue === null ||
+                        secondValue === ""
+                    ) {
+
+                        secondValue =
+                            "Not available";
+
+                    }
+
+
+                    tableHTML += `
+
+                        <tr>
+
+                            <th>
+
+                                ${escapeCompareHTML(
+                        field.label
+                    )}
+
+                            </th>
+
+                            <td>
+
+                                ${escapeCompareHTML(
+                        String(firstValue)
+                    )}
+
+                            </td>
+
+                            <td>
+
+                                ${escapeCompareHTML(
+                        String(secondValue)
+                    )}
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            );
+
+
+            tableHTML += `
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+
+            resultContainer.innerHTML =
+                tableHTML;
+
+        }
+
+
+        /* =====================================================
+           FORMAT COURSES
+           ===================================================== */
+
+        function formatCourses(courses) {
+
+            if (!Array.isArray(courses)) {
+
+                return courses ||
+                    "Not available";
+
+            }
+
+
+            if (courses.length === 0) {
+
+                return "Not available";
+
+            }
+
+
+            return courses.join(", ");
+
+        }
+
+
+        /* =====================================================
+           REMOVE COLLEGE FROM COMPARISON
+           ===================================================== */
+
+        function removeCollegeFromComparison(
+            collegeId
+        ) {
+
+            let comparisonIds = [];
+
+
+            try {
+
+                comparisonIds =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "studentLensCompareColleges"
+                        ) || "[]"
+                    );
+
+
+            } catch (error) {
+
+                comparisonIds = [];
+
+            }
+
+
+            if (!Array.isArray(comparisonIds)) {
+
+                comparisonIds = [];
+
+            }
+
+
+            comparisonIds =
+                comparisonIds
+                    .map(String)
+                    .filter(
+                        function (id) {
+
+                            return id !==
+                                String(collegeId);
+
+                        }
+                    );
+
+
+            localStorage.setItem(
+                "studentLensCompareColleges",
+                JSON.stringify(comparisonIds)
+            );
+
+
+            const collegeOne =
+                document.getElementById(
+                    "collegeOne"
+                );
+
+
+            const collegeTwo =
+                document.getElementById(
+                    "collegeTwo"
+                );
+
+
+            const resultSection =
+                document.getElementById(
+                    "comparisonSection"
+                );
+
+
+            const resultContainer =
+                document.getElementById(
+                    "comparisonResult"
+                );
+
+
+            if (
+                String(collegeOne.value) ===
+                String(collegeId)
+            ) {
+
+                collegeOne.value = "";
+
+            }
+
+
+            if (
+                String(collegeTwo.value) ===
+                String(collegeId)
+            ) {
+
+                collegeTwo.value = "";
+
+            }
+
+
+            resultContainer.innerHTML = "";
+
+            resultSection.style.display =
+                "none";
+
+
+            if (comparisonIds.length >= 2) {
+
+                collegeOne.value =
+                    comparisonIds[0];
+
+
+                collegeTwo.value =
+                    comparisonIds[1];
+
+
+                compareSelectedColleges();
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CLEAR COMPARISON
+           ===================================================== */
+
+        function clearComparison() {
+
+            localStorage.removeItem(
+                "studentLensCompareColleges"
+            );
+
+
+            document.getElementById(
+                "collegeOne"
+            ).value = "";
+
+
+            document.getElementById(
+                "collegeTwo"
+            ).value = "";
+
+
+            document.getElementById(
+                "comparisonResult"
+            ).innerHTML = "";
+
+
+            document.getElementById(
+                "comparisonSection"
+            ).style.display = "none";
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+           ===================================================== */
+
+        function escapeCompareHTML(value) {
+
+            return String(value)
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

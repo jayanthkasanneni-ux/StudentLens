@@ -1,0 +1,323 @@
+
+[
+    {
+        "id": 1,
+        "name": "SRK Institute of Technology",
+        "location": "Vijayawada, Andhra Pradesh",
+        "type": "Engineering College",
+        "courses": [
+            "Information Technology",
+            "Computer Science",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.2,
+        "fees": "₹1.20 Lakhs",
+        "placement": "₹6.50 LPA"
+    },
+    {
+        "id": 2,
+        "name": "Andhra University",
+        "location": "Visakhapatnam, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Information Technology",
+            "Computer Science",
+            "Data Science",
+            "Artificial Intelligence",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.5,
+        "fees": "₹80,000",
+        "placement": "₹7.00 LPA"
+    },
+    {
+        "id": 3,
+        "name": "KL University",
+        "location": "Vaddeswaram, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.3,
+        "fees": "₹2.50 Lakhs",
+        "placement": "₹8.50 LPA"
+    },
+    {
+        "id": 4,
+        "name": "VIT-AP University",
+        "location": "Amaravati, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.4,
+        "fees": "₹2.20 Lakhs",
+        "placement": "₹7.80 LPA"
+    },
+    {
+        "id": 5,
+        "name": "VR Siddhartha Engineering College",
+        "location": "Vijayawada, Andhra Pradesh",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.3,
+        "fees": "₹1.40 Lakhs",
+        "placement": "₹6.80 LPA"
+    },
+    {
+        "id": 6,
+        "name": "GITAM University",
+        "location": "Visakhapatnam, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.4,
+        "fees": "₹2.80 Lakhs",
+        "placement": "₹8.00 LPA"
+    },
+    {
+        "id": 7,
+        "name": "RVR & JC College of Engineering",
+        "location": "Guntur, Andhra Pradesh",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Mechanical Engineering",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.1,
+        "fees": "₹1.30 Lakhs",
+        "placement": "₹5.80 LPA"
+    },
+    {
+        "id": 8,
+        "name": "SASTRA University",
+        "location": "Thanjavur, Tamil Nadu",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.5,
+        "fees": "₹1.80 Lakhs",
+        "placement": "₹8.20 LPA"
+    },
+    {
+        "id": 9,
+        "name": "Amrita Vishwa Vidyapeetham",
+        "location": "Coimbatore, Tamil Nadu",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.6,
+        "fees": "₹3.00 Lakhs",
+        "placement": "₹9.00 LPA"
+    },
+    {
+        "id": 10,
+        "name": "SRM Institute of Science and Technology",
+        "location": "Kattankulathur, Tamil Nadu",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.4,
+        "fees": "₹2.70 Lakhs",
+        "placement": "₹8.50 LPA"
+    },
+    {
+        "id": 11,
+        "name": "Vellore Institute of Technology",
+        "location": "Vellore, Tamil Nadu",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.6,
+        "fees": "₹2.40 Lakhs",
+        "placement": "₹9.20 LPA"
+    },
+    {
+        "id": 12,
+        "name": "Jawaharlal Nehru Technological University Kakinada",
+        "location": "Kakinada, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Electronics and Communication Engineering",
+            "Mechanical Engineering"
+        ],
+        "rating": 4.3,
+        "fees": "₹90,000",
+        "placement": "₹6.00 LPA"
+    },
+    {
+        "id": 13,
+        "name": "Acharya Nagarjuna University",
+        "location": "Guntur, Andhra Pradesh",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Data Science",
+            "Artificial Intelligence",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.1,
+        "fees": "₹85,000",
+        "placement": "₹5.50 LPA"
+    },
+    {
+        "id": 14,
+        "name": "Gayatri Vidya Parishad College of Engineering",
+        "location": "Visakhapatnam, Andhra Pradesh",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.3,
+        "fees": "₹1.25 Lakhs",
+        "placement": "₹6.70 LPA"
+    },
+    {
+        "id": 15,
+        "name": "Chaitanya Bharathi Institute of Technology",
+        "location": "Hyderabad, Telangana",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.5,
+        "fees": "₹1.60 Lakhs",
+        "placement": "₹8.00 LPA"
+    },
+    {
+        "id": 16,
+        "name": "Osmania University",
+        "location": "Hyderabad, Telangana",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Data Science",
+            "Artificial Intelligence",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.4,
+        "fees": "₹75,000",
+        "placement": "₹6.50 LPA"
+    },
+    {
+        "id": 17,
+        "name": "University of Hyderabad",
+        "location": "Hyderabad, Telangana",
+        "type": "University",
+        "courses": [
+            "Computer Science",
+            "Artificial Intelligence",
+            "Data Science",
+            "Information Technology",
+            "Mathematics"
+        ],
+        "rating": 4.5,
+        "fees": "₹70,000",
+        "placement": "₹6.80 LPA"
+    },
+    {
+        "id": 18,
+        "name": "NIT Warangal",
+        "location": "Warangal, Telangana",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electronics and Communication Engineering"
+        ],
+        "rating": 4.7,
+        "fees": "₹1.90 Lakhs",
+        "placement": "₹12.00 LPA"
+    },
+    {
+        "id": 19,
+        "name": "IIT Hyderabad",
+        "location": "Sangareddy, Telangana",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Artificial Intelligence",
+            "Data Science",
+            "Electrical Engineering",
+            "Mechanical Engineering"
+        ],
+        "rating": 4.8,
+        "fees": "₹2.20 Lakhs",
+        "placement": "₹15.00 LPA"
+    },
+    {
+        "id": 20,
+        "name": "Manipal Institute of Technology",
+        "location": "Manipal, Karnataka",
+        "type": "Engineering College",
+        "courses": [
+            "Computer Science",
+            "Information Technology",
+            "Artificial Intelligence",
+            "Data Science",
+            "Cyber Security"
+        ],
+        "rating": 4.6,
+        "fees": "₹3.20 Lakhs",
+        "placement": "₹10.00 LPA"
+    }
+]

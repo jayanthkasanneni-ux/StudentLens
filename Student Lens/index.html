@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="StudentLens helps students discover, compare, and choose the right college.">
+
+    <title>StudentLens | Find Your Right College</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="main-header">
+
+        <nav class="navbar">
+
+            <a href="index.html" class="brand-logo">
+                <span class="brand-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+                        <path d="M22 9V15"></path>
+                    </svg>
+                </span>
+
+                <span>StudentLens</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html" class="active">Home</a>
+
+                <a href="pages/colleges.html">Colleges</a>
+
+                <a href="pages/compare.html">Compare</a>
+
+                <a href="pages/ai-advisor.html">AI Advisor</a>
+                <a href="pages/saved-colleges.html">Saved Colleges</a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="pages/login.html" class="login-link">
+                    Login
+                </a>
+
+                <a href="pages/signup.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Hero Section -->
+    <main>
+
+        <section class="new-hero-section">
+
+            <div class="hero-content">
+
+                <p class="hero-label">
+                    YOUR COLLEGE COMPANION
+                </p>
+
+                <h1>
+                    Find Your
+                    <span>Right College</span>
+                </h1>
+
+                <p class="hero-description">
+                    Discover colleges, compare courses, explore fees,
+                    and make confident decisions about your academic future.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="pages/colleges.html" class="primary-button">
+                        Explore Colleges
+                    </a>
+
+                    <a href="pages/compare.html" class="secondary-button">
+                        Compare Colleges
+                    </a>
+
+                </div>
+
+                <!-- Homepage Search -->
+                <div class="new-search-box">
+
+                    <label for="homepageCollegeSearch">
+                        Search for a college or location
+                    </label>
+
+                    <div class="search-input-wrapper">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="M16 16L21 21"></path>
+                        </svg>
+
+                        <input type="text" id="homepageCollegeSearch" placeholder="Example: Vijayawada"
+                            aria-label="Search for a college or location">
+
+                        <button type="button" onclick="searchCollege()">
+                            Search
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Professional Illustration -->
+            <div class="hero-illustration" aria-label="College discovery illustration">
+
+                <div class="illustration-circle circle-one"></div>
+
+                <div class="illustration-circle circle-two"></div>
+
+                <div class="illustration-window">
+
+                    <div class="window-header">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                    <div class="window-content">
+
+                        <div class="illustration-sidebar">
+
+                            <div class="sidebar-line"></div>
+                            <div class="sidebar-line short"></div>
+                            <div class="sidebar-line"></div>
+                            <div class="sidebar-line short"></div>
+
+                        </div>
+
+                        <div class="illustration-dashboard">
+
+                            <div class="dashboard-heading"></div>
+
+                            <div class="dashboard-cards">
+
+                                <div class="dashboard-card">
+                                    <div class="mini-icon"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <div class="mini-icon second"></div>
+                                    <div class="mini-line"></div>
+                                    <div class="mini-line short"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="chart-area">
+
+                                <div class="chart-bars">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+
+                                <div class="chart-line"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="floating-info info-one">
+
+                    <span class="floating-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11L12 4L21 11"></path>
+                            <path d="M5 10V20H19V10"></path>
+                            <path d="M9 20V14H15V20"></path>
+                        </svg>
+                    </span>
+
+                    <div>
+                        <strong>College Search</strong>
+                        <small>Explore opportunities</small>
+                    </div>
+
+                </div>
+
+                <div class="floating-info info-two">
+
+                    <span class="floating-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 19V5"></path>
+                            <path d="M4 19H21"></path>
+                            <path d="M7 15L11 10L15 13L20 6"></path>
+                        </svg>
+                    </span>
+
+                    <div>
+                        <strong>Smart Comparison</strong>
+                        <small>Make informed decisions</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Statistics Section -->
+        <section class="stats-section">
+
+            <div class="stat-item">
+                <strong>100+</strong>
+                <span>Colleges</span>
+            </div>
+
+            <div class="stat-item">
+                <strong>10+</strong>
+                <span>Courses</span>
+            </div>
+
+            <div class="stat-item">
+                <strong>Smart</strong>
+                <span>Recommendations</span>
+            </div>
+
+            <div class="stat-item">
+                <strong>Simple</strong>
+                <span>Experience</span>
+            </div>
+
+        </section>
+
+
+        <!-- Features Section -->
+        <section class="new-features-section">
+
+            <div class="section-heading">
+
+                <p class="hero-label">
+                    EXPLORE OUR FEATURES
+                </p>
+
+                <h2>
+                    Everything You Need to
+                    <span>Choose Better</span>
+                </h2>
+
+                <p>
+                    Explore the tools designed to make your college
+                    discovery journey simple and organized.
+                </p>
+
+            </div>
+
+
+            <div class="new-feature-grid">
+
+                <!-- Feature 1 -->
+                <article class="new-feature-card">
+
+                    <div class="feature-icon">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="M16 16L21 21"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>College Search</h3>
+
+                    <p>
+                        Find colleges based on location, courses,
+                        and your preferences.
+                    </p>
+
+                    <a href="pages/colleges.html">
+                        Explore Colleges
+                        <span>→</span>
+                    </a>
+
+                </article>
+
+
+                <!-- Feature 2 -->
+                <article class="new-feature-card">
+
+                    <div class="feature-icon">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8 4V20"></path>
+                            <path d="M16 4V20"></path>
+                            <path d="M4 7H12"></path>
+                            <path d="M12 7L8 4L4 7"></path>
+                            <path d="M12 17H20"></path>
+                            <path d="M16 14L12 17L16 20"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>Compare Colleges</h3>
+
+                    <p>
+                        Compare fees, ratings, locations,
+                        and placement information.
+                    </p>
+
+                    <a href="pages/compare.html">
+                        Compare Now
+                        <span>→</span>
+                    </a>
+
+                </article>
+
+
+                <!-- Feature 3 -->
+                <article class="new-feature-card">
+
+                    <div class="feature-icon">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 3L14 8L19 9L15 13L16 19L12 16L8 19L9 13L5 9L10 8Z"></path>
+                            <path d="M19 3V6"></path>
+                            <path d="M17.5 4.5H20.5"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>AI Advisor</h3>
+
+                    <p>
+                        Get personalized college recommendations
+                        based on your academic goals.
+                    </p>
+
+                    <a href="pages/ai-advisor.html">
+                        Try AI Advisor
+                        <span>→</span>
+                    </a>
+
+                </article>
+
+
+                <!-- Feature 4 -->
+                <article class="new-feature-card">
+
+                    <div class="feature-icon">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21C4 16 7 13 12 13C17 13 20 16 20 21"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>Student Profile</h3>
+
+                    <p>
+                        Save your preferences and manage your
+                        college discovery experience.
+                    </p>
+
+                    <a href="pages/profile.html">
+                        Manage Profile
+                        <span>→</span>
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Call to Action -->
+        <section class="new-cta-section">
+
+            <div>
+
+                <p class="hero-label">
+                    YOUR FUTURE STARTS HERE
+                </p>
+
+                <h2>
+                    Make a Smarter College Decision
+                </h2>
+
+                <p>
+                    Discover. Compare. Decide with StudentLens.
+                </p>
+
+            </div>
+
+            <a href="pages/colleges.html" class="primary-button">
+                Start Exploring
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="new-footer">
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="brand-logo">
+
+                <span class="brand-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+                        <path d="M22 9V15"></path>
+                    </svg>
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+            <p>
+                Discover the right college for your future.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="pages/colleges.html">Colleges</a>
+
+            <a href="pages/compare.html">Compare</a>
+
+            <a href="pages/ai-advisor.html">AI Advisor</a>
+
+            <a href="pages/login.html">Login</a>
+
+        </div>
+
+        <p class="footer-copyright">
+            © 2026 StudentLens. All rights reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../script.js"></script>
+
+</body>
+
+</html>

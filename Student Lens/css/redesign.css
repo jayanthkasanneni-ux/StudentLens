@@ -1,0 +1,2450 @@
+
+/* =====================================================
+   STUDENTLENS SHARED REDESIGN SYSTEM
+   ===================================================== */
+
+:root {
+    --sl-primary: #2563eb;
+    --sl-primary-dark: #1d4ed8;
+    --sl-navy: #172554;
+    --sl-text: #1f2937;
+    --sl-muted: #64748b;
+    --sl-background: #f8fafc;
+    --sl-white: #ffffff;
+    --sl-border: #e2e8f0;
+    --sl-light-blue: #eff6ff;
+    --sl-radius: 14px;
+    --sl-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+
+/* General page styling */
+
+.page-main {
+    min-height: 600px;
+    padding: 60px 8%;
+    background-color: var(--sl-background);
+}
+
+.page-heading {
+    max-width: 720px;
+    margin: 0 auto 35px;
+    text-align: center;
+}
+
+.page-heading h1 {
+    margin-bottom: 15px;
+    color: var(--sl-navy);
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.2;
+}
+
+.page-heading p {
+    color: var(--sl-muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* Page hero */
+
+.inner-page-hero {
+    padding: 60px 8%;
+    text-align: center;
+    background: linear-gradient(
+        120deg,
+        #eff6ff,
+        #ffffff
+    );
+}
+
+.inner-page-hero h1 {
+    margin-bottom: 12px;
+    color: var(--sl-navy);
+    font-size: clamp(32px, 5vw, 50px);
+}
+
+.inner-page-hero p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: var(--sl-muted);
+    line-height: 1.8;
+}
+
+
+/* Shared cards */
+
+.design-card {
+    padding: 28px;
+    border: 1px solid var(--sl-border);
+    border-radius: var(--sl-radius);
+    background-color: var(--sl-white);
+    box-shadow: var(--sl-shadow);
+}
+
+.design-card h2,
+.design-card h3 {
+    color: var(--sl-navy);
+}
+
+.design-card p {
+    color: var(--sl-muted);
+    line-height: 1.7;
+}
+
+
+/* Shared buttons */
+
+.design-primary,
+.design-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.design-primary {
+    border: 1px solid var(--sl-primary);
+    background-color: var(--sl-primary);
+    color: white;
+}
+
+.design-primary:hover {
+    background-color: var(--sl-primary-dark);
+    border-color: var(--sl-primary-dark);
+    transform: translateY(-2px);
+}
+
+.design-secondary {
+    border: 1px solid #bfdbfe;
+    background-color: white;
+    color: var(--sl-primary);
+}
+
+.design-secondary:hover {
+    background-color: var(--sl-light-blue);
+    transform: translateY(-2px);
+}
+
+
+/* Form styling */
+
+.design-form {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid var(--sl-border);
+    border-radius: var(--sl-radius);
+    background-color: white;
+    box-shadow: var(--sl-shadow);
+}
+
+.design-form .form-group {
+    margin-bottom: 20px;
+}
+
+.design-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.design-form input,
+.design-form select,
+.design-form textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    background-color: white;
+    color: var(--sl-text);
+    font-size: 14px;
+}
+
+.design-form input:focus,
+.design-form select:focus,
+.design-form textarea:focus {
+    border-color: var(--sl-primary);
+    box-shadow: 0 0 0 3px #dbeafe;
+}
+
+
+/* Grid layouts */
+
+.design-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.design-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* Search area */
+
+.design-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 650px;
+    margin: 0 auto 35px;
+    padding: 7px;
+    border: 1px solid var(--sl-border);
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: var(--sl-shadow);
+}
+
+.design-search input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.design-search button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--sl-primary);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.design-search button:hover {
+    background-color: var(--sl-primary-dark);
+}
+
+
+/* Responsive shared styles */
+
+@media (max-width: 850px) {
+
+    .design-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .design-grid-two {
+        grid-template-columns: 1fr;
+    }
+
+    .page-main {
+        padding: 45px 5%;
+    }
+
+}
+
+@media (max-width: 550px) {
+
+    .design-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .design-card,
+    .design-form {
+        padding: 22px;
+    }
+
+    .design-search {
+        flex-wrap: wrap;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .design-search input {
+        border: 1px solid var(--sl-border);
+        border-radius: 8px;
+        background-color: white;
+    }
+
+    .design-search button {
+        width: 100%;
+    }
+
+}
+
+/* =====================================================
+   COLLEGE CARD REDESIGN
+   ===================================================== */
+
+#collegeContainer {
+    align-items: stretch;
+}
+
+#collegeContainer .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    transition: transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#collegeContainer .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
+}
+
+#collegeContainer .card h3 {
+    margin-bottom: 14px;
+    color: #172554;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+#collegeContainer .card p {
+    margin-bottom: 9px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+#collegeContainer .card strong {
+    color: #334155;
+}
+
+#collegeContainer .card button {
+    margin-top: 12px;
+    margin-right: 6px;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 7px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#collegeContainer .card button:hover {
+    background-color: #1d4ed8;
+}
+
+#collegeContainer .card .secondary {
+    border: 1px solid #bfdbfe;
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+#collegeContainer .card .secondary:hover {
+    background-color: #dbeafe;
+}
+
+@media (max-width: 550px) {
+
+    #collegeContainer .card {
+        padding: 22px;
+    }
+
+    #collegeContainer .card button {
+        width: 100%;
+        margin-right: 0;
+    }
+
+}
+
+/* =====================================================
+   COLLEGE DETAILS PAGE
+   ===================================================== */
+
+.college-details-main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.college-details-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.college-details-container .card {
+    padding: 40px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.07);
+}
+
+.college-details-container .card h3 {
+    margin-bottom: 18px;
+    color: #172554;
+    font-size: 25px;
+    line-height: 1.4;
+}
+
+.college-details-container .card p {
+    margin-bottom: 13px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.college-details-container .card p strong {
+    color: #334155;
+}
+
+.college-details-container .card h3:not(:first-of-type) {
+    margin-top: 32px;
+    font-size: 19px;
+}
+
+.college-details-container .ai-reasons {
+    margin-top: 12px;
+    padding: 20px 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #f8fafc;
+}
+
+.college-details-container .ai-reasons li {
+    margin-bottom: 10px;
+    color: #475569;
+    font-size: 14px;
+}
+
+.college-details-container .ai-reasons li:last-child {
+    margin-bottom: 0;
+}
+
+.college-details-container .professional-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 22px;
+    border-radius: 15px;
+}
+
+.college-details-container .professional-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.college-details-container .card-actions {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.college-details-container .card-actions button {
+    min-height: 43px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+@media (max-width: 700px) {
+
+    .college-details-container .card {
+        padding: 25px;
+    }
+
+    .college-details-container .card h3 {
+        font-size: 21px;
+    }
+
+    .college-details-container .card-actions {
+        flex-direction: column;
+    }
+
+    .college-details-container .card-actions button {
+        width: 100%;
+    }
+
+}
+/* =========================================
+   COMPARE PAGE
+   ========================================= */
+
+
+/* PAGE HERO */
+
+.compare-page-hero {
+    padding: 80px 24px;
+    background: linear-gradient(
+        135deg,
+        #eff6ff 0%,
+        #f8fafc 100%
+    );
+    text-align: center;
+}
+
+.page-hero-content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.section-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.page-hero h1 {
+    margin: 0;
+    color: #1f2937;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.page-hero h1 span {
+    display: block;
+    color: #2563eb;
+}
+
+.page-hero p {
+    max-width: 650px;
+    margin: 22px auto 0;
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+
+/* MAIN COMPARE AREA */
+
+.compare-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 24px;
+}
+
+.compare-selection-section {
+    width: 100%;
+}
+
+.section-heading {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin: 0 0 12px;
+    color: #1f2937;
+    font-size: 32px;
+    font-weight: 750;
+}
+
+.section-heading p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #6b7280;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+
+/* COLLEGE SELECTION GRID */
+
+.compare-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.compare-selection-card {
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.compare-selection-card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.10);
+    transform: translateY(-3px);
+}
+
+
+
+/* SELECTION CARD HEADER */
+
+.selection-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+.selection-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.selection-card-header h3 {
+    margin: 0 0 5px;
+    color: #1f2937;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.selection-card-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+
+/* SELECT INPUTS */
+
+.compare-selection-card label {
+    display: block;
+    margin-bottom: 10px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.college-select {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 14px;
+    color: #1f2937;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.college-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.college-select:hover {
+    border-color: #93c5fd;
+}
+
+
+
+/* COMPARE BUTTON */
+
+.compare-action-area {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.compare-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #2563eb;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.compare-button:hover {
+    background: #1d4ed8;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+    transform: translateY(-2px);
+}
+
+.compare-button:active {
+    transform: translateY(0);
+}
+
+.compare-button svg {
+    flex-shrink: 0;
+}
+
+.compare-helper-text {
+    margin-top: 14px;
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+
+/* COMPARISON RESULT */
+
+.comparison-result-section {
+    margin-top: 75px;
+    padding-top: 55px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.comparison-heading {
+    margin-bottom: 30px;
+}
+
+.comparison-result-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 4px;
+}
+
+
+
+/* COMPARISON TABLE */
+
+.comparison-result-container table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.comparison-result-container th {
+    padding: 18px 20px;
+    color: #ffffff;
+    background: #1e3a8a;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.comparison-result-container th:first-child {
+    width: 30%;
+}
+
+.comparison-result-container td {
+    padding: 18px 20px;
+    color: #374151;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.comparison-result-container tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-result-container tr:nth-child(even) td {
+    background: #f8fafc;
+}
+
+.comparison-result-container tr:hover td {
+    background: #eff6ff;
+}
+
+
+
+/* BOTTOM CTA SECTION */
+
+.compare-bottom-section {
+    padding: 75px 24px;
+    color: #ffffff;
+    background: #111827;
+    text-align: center;
+}
+
+.bottom-content {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.bottom-label {
+    color: #93c5fd;
+}
+
+.compare-bottom-section h2 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.compare-bottom-section p {
+    max-width: 600px;
+    margin: 0 auto 28px;
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.bottom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 9px;
+    color: #ffffff;
+    background: #2563eb;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.bottom-button:hover {
+    color: #ffffff;
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .compare-page-hero {
+        padding: 60px 20px;
+    }
+
+    .page-hero h1 {
+        font-size: 36px;
+    }
+
+    .page-hero p {
+        font-size: 14px;
+    }
+
+    .compare-main {
+        padding: 50px 18px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .compare-selection-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .compare-selection-card {
+        padding: 24px;
+    }
+
+    .comparison-result-section {
+        margin-top: 50px;
+        padding-top: 40px;
+    }
+
+    .compare-bottom-section {
+        padding: 55px 20px;
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    .page-hero h1 {
+        font-size: 30px;
+    }
+
+    .compare-selection-card {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .selection-card-header {
+        gap: 12px;
+    }
+
+    .selection-number {
+        width: 42px;
+        height: 42px;
+    }
+
+    .selection-card-header h3 {
+        font-size: 17px;
+    }
+
+    .compare-button {
+        width: 100%;
+        padding: 0 18px;
+    }
+
+    .compare-helper-text {
+        font-size: 12px;
+    }
+
+}
+/* =========================================
+   AI ADVISOR PAGE
+   ========================================= */
+
+
+/* PAGE HERO */
+
+.advisor-page-hero {
+    padding: 80px 24px;
+    background: linear-gradient(
+        135deg,
+        #eff6ff 0%,
+        #f8fafc 100%
+    );
+    text-align: center;
+}
+
+
+
+/* MAIN CONTENT */
+
+.advisor-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 24px;
+}
+
+.advisor-form-section {
+    width: 100%;
+}
+
+
+
+/* ADVISOR FORM CARD */
+
+.advisor-form-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 38px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.07);
+}
+
+
+
+/* FORM HEADER */
+
+.advisor-form-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 28px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.advisor-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+}
+
+.advisor-form-header h3 {
+    margin: 0 0 6px;
+    color: #1f2937;
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.advisor-form-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+
+/* FORM GRID */
+
+.advisor-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 24px;
+}
+
+.advisor-form-group {
+    margin: 0;
+}
+
+
+
+/* FORM LABELS */
+
+.advisor-form-group label {
+    display: block;
+    margin-bottom: 10px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+
+
+/* FORM INPUTS */
+
+.advisor-form-group input,
+.advisor-form-group select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 50px;
+    padding: 0 14px;
+    color: #1f2937;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.advisor-form-group input::placeholder {
+    color: #9ca3af;
+}
+
+.advisor-form-group input:hover,
+.advisor-form-group select:hover {
+    border-color: #93c5fd;
+}
+
+.advisor-form-group input:focus,
+.advisor-form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.advisor-form-group small {
+    display: block;
+    margin-top: 8px;
+    color: #9ca3af;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+
+/* FORM ACTION */
+
+.advisor-form-action {
+    margin-top: 35px;
+    padding-top: 30px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.advisor-submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background: #2563eb;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.advisor-submit-button:hover {
+    background: #1d4ed8;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
+    transform: translateY(-2px);
+}
+
+.advisor-submit-button:active {
+    transform: translateY(0);
+}
+
+.advisor-submit-button svg {
+    flex-shrink: 0;
+}
+
+.advisor-form-action p {
+    max-width: 550px;
+    margin: 15px auto 0;
+    color: #9ca3af;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+
+
+/* AI RESULTS */
+
+.advisor-results-section {
+    margin-top: 75px;
+    padding-top: 55px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.advisor-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+
+
+/* RESULT CARDS */
+
+.advisor-results-grid .card {
+    height: 100%;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.advisor-results-grid .card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.10);
+    transform: translateY(-4px);
+}
+
+.advisor-results-grid .card h3 {
+    margin-top: 0;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.advisor-results-grid .card p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+
+/* ADVISOR BOTTOM SECTION */
+
+.advisor-bottom-section {
+    padding: 75px 24px;
+    color: #ffffff;
+    background: #111827;
+    text-align: center;
+}
+
+.advisor-bottom-section h2 {
+    max-width: 700px;
+    margin: 0 auto 16px;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.advisor-bottom-section p {
+    max-width: 600px;
+    margin: 0 auto 28px;
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .advisor-results-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .advisor-form-card {
+        padding: 30px;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+
+    .advisor-page-hero {
+        padding: 60px 20px;
+    }
+
+    .advisor-main {
+        padding: 50px 18px;
+    }
+
+    .advisor-form-card {
+        padding: 26px;
+        border-radius: 16px;
+    }
+
+    .advisor-form-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .advisor-form-header h3 {
+        font-size: 19px;
+    }
+
+    .advisor-results-section {
+        margin-top: 50px;
+        padding-top: 40px;
+    }
+
+    .advisor-results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .advisor-bottom-section {
+        padding: 55px 20px;
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    .advisor-form-card {
+        padding: 20px;
+    }
+
+    .advisor-form-header {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .advisor-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .advisor-form-header h3 {
+        font-size: 17px;
+    }
+
+    .advisor-form-header p {
+        font-size: 13px;
+    }
+
+    .advisor-submit-button {
+        width: 100%;
+        padding: 0 18px;
+        font-size: 14px;
+    }
+
+}
+/* =========================================
+   STUDENTLENS
+   GLOBAL PROFESSIONAL CARD SYSTEM
+   ========================================= */
+
+
+/* COMMON CARD CONTAINER */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 24px;
+    align-items: stretch;
+    width: 100%;
+}
+
+
+
+/* COMMON CARD */
+
+.cards .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.cards .card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.10);
+    transform: translateY(-4px);
+}
+
+
+
+/* CARD CONTENT */
+
+.cards .card h3 {
+    margin: 0 0 14px;
+    color: #111827;
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.cards .card h4 {
+    margin: 0 0 10px;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cards .card p {
+    margin: 7px 0;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+.cards .card strong {
+    color: #374151;
+    font-weight: 700;
+}
+
+
+
+/* CARD ICON */
+
+.card-icon,
+.professional-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 20px;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 11px;
+}
+
+
+
+/* CARD BADGE */
+
+.card-badge,
+.ai-match-badge {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 18px;
+    padding: 6px 11px;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.2px;
+}
+
+
+
+/* MATCH SCORE */
+
+.match-score {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    width: fit-content;
+    margin: 2px 0 18px;
+    padding: 8px 12px;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+
+
+/* CARD INFORMATION AREA */
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.card-info p {
+    margin: 0;
+}
+
+
+
+/* CARD REASON SECTION */
+
+.card-reasons {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #eef2f7;
+}
+
+.card-reasons h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.card-reasons ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding-left: 18px;
+}
+
+.card-reasons li {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+
+/* CARD ACTIONS */
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+.card-actions a,
+.card-actions button {
+    min-height: 42px;
+    padding: 0 15px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.card-actions a:hover,
+.card-actions button:hover {
+    transform: translateY(-1px);
+}
+
+
+
+/* PRIMARY CARD BUTTON */
+
+.card-actions .primary,
+.card .primary {
+    color: #ffffff;
+    background: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.card-actions .primary:hover,
+.card .primary:hover {
+    color: #ffffff;
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+
+
+/* SECONDARY CARD BUTTON */
+
+.card-actions .secondary,
+.card-actions .outline-button,
+.card .secondary {
+    color: #2563eb;
+    background: #ffffff;
+    border: 1px solid #2563eb;
+}
+
+.card-actions .secondary:hover,
+.card-actions .outline-button:hover,
+.card .secondary:hover {
+    color: #1d4ed8;
+    background: #eff6ff;
+}
+
+
+
+/* CARD FOOTER */
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #eef2f7;
+}
+
+
+
+/* =========================================
+   AI ADVISOR RESULT CARDS
+   ========================================= */
+
+.advisor-results-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 24px;
+    align-items: stretch;
+}
+
+.advisor-results-grid .card {
+    min-height: 0;
+    height: 100%;
+}
+
+
+
+/* AI ADVISOR CARD TEXT */
+
+.advisor-results-grid .card p {
+    margin: 8px 0;
+}
+
+.advisor-results-grid .card ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.advisor-results-grid .card li {
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   COLLEGE CARD INFORMATION
+   ========================================= */
+
+.college-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 4px;
+}
+
+.college-card-info p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.college-card-info strong {
+    color: #374151;
+}
+
+
+
+/* =========================================
+   RESPONSIVE CARD DESIGN
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .cards,
+    .advisor-results-grid {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        );
+        gap: 18px;
+    }
+
+    .cards .card {
+        padding: 21px;
+        border-radius: 14px;
+    }
+
+    .cards .card h3 {
+        font-size: 18px;
+    }
+
+    .card-actions {
+        padding-top: 20px;
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    .cards,
+    .advisor-results-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cards .card {
+        padding: 20px;
+    }
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .card-actions a,
+    .card-actions button {
+        width: 100%;
+    }
+
+}
+/* =========================================
+   STUDENTLENS AI ADVISOR
+   PROFESSIONAL RECOMMENDATION CARDS
+   ========================================= */
+
+
+/* RESULTS GRID */
+
+#aiResults {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
+    gap: 24px;
+    align-items: stretch;
+    width: 100%;
+}
+
+
+
+/* RECOMMENDATION CARD */
+
+#aiResults .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+#aiResults .card:hover {
+    border-color: #bfdbfe;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+    transform: translateY(-4px);
+}
+
+
+
+/* CARD TOP AREA */
+
+.ai-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.ai-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+}
+
+.ai-card-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+
+
+/* COLLEGE NAME */
+
+#aiResults .card h3 {
+    min-height: 52px;
+    margin: 0 0 16px;
+    color: #111827;
+    font-size: 20px;
+    font-weight: 750;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+
+
+/* MATCH SCORE */
+
+.ai-match-score {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-bottom: 22px;
+    padding: 8px 12px;
+    color: #1d4ed8;
+    background: #eff6ff;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+
+
+/* COLLEGE DETAILS */
+
+.ai-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.ai-card-detail {
+    display: grid;
+    grid-template-columns: 94px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.ai-card-detail strong {
+    color: #374151;
+    font-weight: 700;
+}
+
+.ai-card-detail span {
+    overflow-wrap: anywhere;
+}
+
+
+
+/* MATCH REASONS */
+
+.ai-card-reasons {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.ai-card-reasons h4 {
+    margin: 0 0 13px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+.ai-card-reasons ul {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 0;
+    padding-left: 18px;
+}
+
+.ai-card-reasons li {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+
+/* CARD ACTIONS */
+
+.ai-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #eef2f7;
+}
+
+.ai-card-actions button {
+    flex: 1 1 110px;
+    min-height: 42px;
+    padding: 0 12px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.ai-card-actions button:hover {
+    transform: translateY(-1px);
+}
+
+.ai-view-button {
+    color: #ffffff;
+    background: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.ai-view-button:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.ai-save-button {
+    color: #2563eb;
+    background: #ffffff;
+    border: 1px solid #2563eb;
+}
+
+.ai-save-button:hover {
+    background: #eff6ff;
+}
+
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+
+    #aiResults {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
+        gap: 18px;
+    }
+
+    #aiResults .card {
+        padding: 22px;
+    }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    #aiResults {
+        grid-template-columns: 1fr;
+    }
+
+    #aiResults .card {
+        padding: 20px;
+    }
+
+    .ai-card-top {
+        margin-bottom: 18px;
+    }
+
+    #aiResults .card h3 {
+        min-height: auto;
+        font-size: 18px;
+    }
+
+    .ai-card-actions {
+        flex-direction: column;
+    }
+
+    .ai-card-actions button {
+        width: 100%;
+    }
+
+}
+
+/* =====================================================
+   COLLEGE FILTERS
+   ===================================================== */
+
+.college-filter-panel {
+    margin-bottom: 35px;
+}
+
+.college-filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 18px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    color: #172554;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dbe3ef;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 14px;
+    outline: none;
+}
+
+.filter-group select:focus {
+    border-color: #2563eb;
+}
+
+@media (max-width: 900px) {
+    .college-filters {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .college-filters {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   COLLEGE DETAILS ENHANCEMENT
+   ========================================================= */
+
+.college-details-card {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+.college-details-title {
+    margin: 20px 0 10px;
+    color: #102a43;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.college-details-location {
+    color: #52606d;
+    margin-bottom: 28px;
+}
+
+.college-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+}
+
+.college-info-item {
+    padding: 20px;
+    border: 1px solid #d9e2ec;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.info-label {
+    display: block;
+    color: #627d98;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.college-info-item strong {
+    color: #102a43;
+    font-size: 16px;
+}
+
+.college-details-section {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #d9e2ec;
+}
+
+.college-details-section h3 {
+    color: #102a43;
+    margin-bottom: 16px;
+}
+
+.college-details-section ul {
+    padding-left: 22px;
+}
+
+.college-details-section li {
+    color: #486581;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE COLLEGE DETAILS
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .college-details-card {
+        padding: 22px;
+    }
+
+    .college-details-title {
+        font-size: 25px;
+    }
+
+    .college-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .card-actions button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================
+   SAVED COLLEGES - PROFESSIONAL LAYOUT
+   ========================================= */
+
+/* Main saved colleges page spacing */
+
+.saved-colleges-container,
+.saved-page-container {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 48px 0 64px;
+}
+
+
+/* Saved colleges heading */
+
+.saved-colleges-container h1,
+.saved-page-container h1 {
+    margin: 0 0 8px;
+    color: #172554;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.saved-colleges-container > p,
+.saved-page-container > p {
+    margin: 0 0 32px;
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* Saved count badge */
+
+.saved-count,
+.saved-college-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* College grid */
+
+.college-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+}
+
+
+/* College card */
+
+.saved-college-card,
+.college-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.saved-college-card:hover,
+.college-card:hover {
+    transform: translateY(-4px);
+    border-color: #bfdbfe;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.10);
+}
+
+
+/* Card image */
+
+.saved-college-card .college-card-image,
+.college-card .college-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #e0f2fe
+    );
+    color: #2563eb;
+    font-weight: 700;
+}
+
+
+/* Card content */
+
+.saved-college-card .college-card-content,
+.college-card .college-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 22px;
+}
+
+
+/* College type */
+
+.college-type {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+
+/* College name */
+
+.saved-college-card h3,
+.college-card h3 {
+    margin: 0 0 12px;
+    color: #0f172a;
+    font-size: 20px;
+    font-weight: 750;
+    line-height: 1.35;
+}
+
+
+/* College location */
+
+.college-location {
+    margin: 0 0 18px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* College details */
+
+.college-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.college-card-details span {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* Card buttons */
+
+.saved-college-card button,
+.college-card button,
+.saved-college-card a,
+.college-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 14px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.saved-college-card button:hover,
+.college-card button:hover,
+.saved-college-card a:hover,
+.college-card a:hover {
+    border-color: #1d4ed8;
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+
+/* Button layout */
+
+.saved-college-card .college-card-content > button,
+.saved-college-card .college-card-content > a {
+    width: 100%;
+    margin-top: auto;
+}
+
+
+/* Remove button */
+
+.saved-college-card .remove-button,
+.saved-college-card button[data-action="remove"] {
+    border-color: #fecaca;
+    background: #ffffff;
+    color: #dc2626;
+}
+
+.saved-college-card .remove-button:hover,
+.saved-college-card button[data-action="remove"]:hover {
+    border-color: #dc2626;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+
+/* Empty state */
+
+.empty-saved-colleges,
+.empty-dashboard-state {
+    grid-column: 1 / -1;
+    padding: 56px 24px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+    background: #f8fafc;
+    text-align: center;
+}
+
+.empty-saved-colleges h3,
+.empty-dashboard-state h3 {
+    margin: 0 0 10px;
+    color: #172554;
+    font-size: 22px;
+}
+
+.empty-saved-colleges p,
+.empty-dashboard-state p {
+    margin: 0 0 22px;
+    color: #64748b;
+}
+
+
+/* Responsive tablet */
+
+@media (max-width: 1024px) {
+
+    .college-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+}
+
+
+/* Responsive mobile */
+
+@media (max-width: 640px) {
+
+    .saved-colleges-container,
+    .saved-page-container {
+        width: min(100% - 32px, 520px);
+        padding: 32px 0 48px;
+    }
+
+    .college-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .saved-college-card .college-card-content,
+    .college-card .college-card-content {
+        padding: 18px;
+    }
+
+    .saved-college-card h3,
+    .college-card h3 {
+        font-size: 18px;
+    }
+
+}

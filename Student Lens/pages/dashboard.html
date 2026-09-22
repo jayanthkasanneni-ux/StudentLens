@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentLens - Dashboard</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+        /* =====================================
+           DASHBOARD DESIGN SYSTEM
+        ===================================== */
+
+        :root {
+            --dashboard-primary: #2563eb;
+            --dashboard-primary-dark: #1d4ed8;
+            --dashboard-background: #f5f7fb;
+            --dashboard-card: #ffffff;
+            --dashboard-text: #0f172a;
+            --dashboard-muted: #64748b;
+            --dashboard-border: #e2e8f0;
+            --dashboard-success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--dashboard-background);
+            color: var(--dashboard-text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* =====================================
+           NAVIGATION
+        ===================================== */
+
+        .dashboard-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            padding: 18px 7%;
+            background: #ffffff;
+            border-bottom: 1px solid var(--dashboard-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .dashboard-logo {
+            color: var(--dashboard-primary);
+            font-size: 23px;
+            font-weight: 800;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .dashboard-nav-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .dashboard-nav-links a {
+            color: #334155;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .dashboard-nav-links a:hover {
+            color: var(--dashboard-primary);
+        }
+
+        .dashboard-nav-links .active {
+            color: var(--dashboard-primary);
+        }
+
+        /* =====================================
+           MAIN CONTAINER
+        ===================================== */
+
+        .dashboard-container {
+            width: min(1180px, 90%);
+            margin: 0 auto;
+            padding: 38px 0 50px;
+        }
+
+        /* =====================================
+           WELCOME HEADER
+        ===================================== */
+
+        .dashboard-welcome {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            padding: 34px;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+            border: 1px solid #dbeafe;
+            border-radius: 20px;
+            margin-bottom: 28px;
+        }
+
+        .dashboard-welcome-content {
+            flex: 1;
+        }
+
+        .dashboard-label {
+            color: var(--dashboard-primary);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-welcome h1 {
+            margin: 0 0 12px;
+            color: var(--dashboard-text);
+            font-size: clamp(27px, 4vw, 42px);
+            line-height: 1.2;
+        }
+
+        .dashboard-welcome h1 span {
+            color: var(--dashboard-primary);
+        }
+
+        .dashboard-welcome p {
+            color: var(--dashboard-muted);
+            font-size: 16px;
+            line-height: 1.7;
+            margin: 0;
+            max-width: 650px;
+        }
+
+        .dashboard-welcome-action {
+            flex-shrink: 0;
+        }
+
+        .dashboard-profile-badge {
+            width: 105px;
+            height: 105px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--dashboard-primary);
+            font-size: 38px;
+            font-weight: 800;
+            border: 6px solid #ffffff;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+        }
+
+        /* =====================================
+           SUMMARY STATISTICS
+        ===================================== */
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .dashboard-stat-card {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            padding: 23px;
+            background: var(--dashboard-card);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .dashboard-stat-icon {
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: #eff6ff;
+            color: var(--dashboard-primary);
+            font-size: 23px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .dashboard-stat-card h3 {
+            margin: 0 0 5px;
+            color: var(--dashboard-text);
+            font-size: 27px;
+        }
+
+        .dashboard-stat-card p {
+            margin: 0;
+            color: var(--dashboard-muted);
+            font-size: 13px;
+        }
+
+        /* =====================================
+           SECTION HEADER
+        ===================================== */
+
+        .dashboard-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .dashboard-section-header h2 {
+            margin: 0;
+            color: var(--dashboard-text);
+            font-size: 25px;
+        }
+
+        .dashboard-section-header a {
+            color: var(--dashboard-primary);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .dashboard-section-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================
+           QUICK ACTION CARDS
+        ===================================== */
+
+        .dashboard-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .dashboard-action-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 25px;
+            background: var(--dashboard-card);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 17px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .dashboard-action-card:hover {
+            transform: translateY(-4px);
+            border-color: #bfdbfe;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        }
+
+        .dashboard-action-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            background: #eff6ff;
+            color: var(--dashboard-primary);
+            border-radius: 12px;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .dashboard-action-card h3 {
+            margin: 0 0 10px;
+            color: var(--dashboard-text);
+            font-size: 18px;
+        }
+
+        .dashboard-action-card p {
+            min-height: 65px;
+            margin: 0 0 20px;
+            color: var(--dashboard-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .dashboard-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 43px;
+            padding: 11px 16px;
+            border: none;
+            border-radius: 9px;
+            background: var(--dashboard-primary);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .dashboard-button:hover {
+            background: var(--dashboard-primary-dark);
+        }
+
+        .dashboard-button.secondary {
+            background: #eff6ff;
+            color: var(--dashboard-primary);
+        }
+
+        .dashboard-button.secondary:hover {
+            background: #dbeafe;
+        }
+
+        /* =====================================
+           LOWER DASHBOARD GRID
+        ===================================== */
+
+        .dashboard-lower-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .dashboard-panel {
+            background: var(--dashboard-card);
+            border: 1px solid var(--dashboard-border);
+            border-radius: 17px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        .dashboard-panel h2 {
+            margin: 0 0 8px;
+            font-size: 21px;
+            color: var(--dashboard-text);
+        }
+
+        .dashboard-panel-description {
+            margin: 0 0 22px;
+            color: var(--dashboard-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =====================================
+           PROFILE SUMMARY
+        ===================================== */
+
+        .profile-summary {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .profile-summary-avatar {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--dashboard-primary);
+            font-size: 24px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .profile-summary h3 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            color: var(--dashboard-text);
+        }
+
+        .profile-summary p {
+            margin: 0;
+            color: var(--dashboard-muted);
+            font-size: 13px;
+        }
+
+        .profile-detail-list {
+            display: grid;
+            gap: 13px;
+            margin-bottom: 20px;
+        }
+
+        .profile-detail-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        .profile-detail-item span:first-child {
+            color: var(--dashboard-muted);
+        }
+
+        .profile-detail-item span:last-child {
+            color: var(--dashboard-text);
+            font-weight: 700;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        /* =====================================
+           RECENTLY VIEWED
+        ===================================== */
+
+        .recent-college-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .recent-college-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 11px;
+            background: #ffffff;
+        }
+
+        .recent-college-info {
+            min-width: 0;
+        }
+
+        .recent-college-info h3 {
+            margin: 0 0 5px;
+            color: var(--dashboard-text);
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .recent-college-info p {
+            margin: 0;
+            color: var(--dashboard-muted);
+            font-size: 12px;
+        }
+
+        .recent-college-item button {
+            width: auto;
+            min-width: 76px;
+            flex-shrink: 0;
+            padding: 9px 12px;
+            min-height: 35px;
+            font-size: 12px;
+        }
+
+        .dashboard-empty-state {
+            padding: 22px 12px;
+            text-align: center;
+            color: var(--dashboard-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            background: #f8fafc;
+            border-radius: 11px;
+        }
+
+        /* =====================================
+           BOTTOM CTA
+        ===================================== */
+
+        .dashboard-bottom-cta {
+            padding: 36px;
+            background: #0f172a;
+            border-radius: 18px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .dashboard-bottom-cta h2 {
+            margin: 0 0 10px;
+            font-size: 27px;
+        }
+
+        .dashboard-bottom-cta p {
+            margin: 0 0 23px;
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        .dashboard-bottom-cta button {
+            width: auto;
+            padding: 12px 28px;
+        }
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        .dashboard-footer {
+            padding: 25px 7%;
+            background: #020617;
+            color: #94a3b8;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* =====================================
+           RESPONSIVE DESIGN
+        ===================================== */
+
+        @media (max-width: 900px) {
+
+            .dashboard-nav {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .dashboard-nav-links {
+                gap: 14px;
+            }
+
+            .dashboard-welcome {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .dashboard-welcome-action {
+                align-self: flex-start;
+            }
+
+            .dashboard-stats,
+            .dashboard-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-lower-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .dashboard-container {
+                width: 92%;
+                padding-top: 24px;
+            }
+
+            .dashboard-nav {
+                padding: 16px 4%;
+            }
+
+            .dashboard-nav-links {
+                width: 100%;
+                gap: 12px 16px;
+            }
+
+            .dashboard-nav-links a {
+                font-size: 13px;
+            }
+
+            .dashboard-welcome {
+                padding: 24px;
+            }
+
+            .dashboard-welcome h1 {
+                font-size: 29px;
+            }
+
+            .dashboard-welcome p {
+                font-size: 14px;
+            }
+
+            .dashboard-profile-badge {
+                width: 78px;
+                height: 78px;
+                font-size: 28px;
+            }
+
+            .dashboard-stats,
+            .dashboard-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-stat-card {
+                padding: 19px;
+            }
+
+            .dashboard-action-card {
+                padding: 22px;
+            }
+
+            .dashboard-action-card p {
+                min-height: auto;
+            }
+
+            .dashboard-panel {
+                padding: 21px;
+            }
+
+            .dashboard-section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .dashboard-bottom-cta {
+                padding: 28px 20px;
+            }
+
+            .dashboard-bottom-cta h2 {
+                font-size: 23px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav class="dashboard-nav">
+
+        <a class="dashboard-logo" href="../index.html">
+            StudentLens
+        </a>
+
+        <div class="dashboard-nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html">
+                AI Advisor
+            </a>
+
+            <a href="dashboard.html" class="active">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================
+         MAIN DASHBOARD
+    ===================================== -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =====================================
+             WELCOME SECTION
+        ===================================== -->
+
+        <section class="dashboard-welcome">
+
+            <div class="dashboard-welcome-content">
+
+                <div class="dashboard-label">
+                    Student Dashboard
+                </div>
+
+                <h1>
+                    Welcome back, <span id="dashboardUserName">Student</span>
+                </h1>
+
+                <p>
+                    Manage your college discovery journey, explore
+                    institutions, compare opportunities, and receive
+                    personalized guidance through StudentLens.
+                </p>
+
+            </div>
+
+            <div class="dashboard-welcome-action">
+
+                <div class="dashboard-profile-badge" id="dashboardAvatar">
+                    S
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SUMMARY STATISTICS
+        ===================================== -->
+
+        <section class="dashboard-stats">
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    S
+                </div>
+
+                <div>
+
+                    <h3 id="savedCollegeCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Saved Colleges
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    V
+                </div>
+
+                <div>
+
+                    <h3 id="recentCollegeCount">
+                        0
+                    </h3>
+
+                    <p>
+                        Recently Viewed
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-stat-card">
+
+                <div class="dashboard-stat-icon">
+                    P
+                </div>
+
+                <div>
+
+                    <h3 id="profileCompletion">
+                        0%
+                    </h3>
+
+                    <p>
+                        Profile Completion
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             QUICK ACTIONS
+        ===================================== -->
+
+        <section>
+
+            <div class="dashboard-section-header">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+            </div>
+
+
+            <div class="dashboard-actions">
+
+
+                <!-- Explore Colleges -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        C
+                    </div>
+
+                    <h3>
+                        Explore Colleges
+                    </h3>
+
+                    <p>
+                        Search and discover colleges based on your
+                        preferred course, location, budget, and ratings.
+                    </p>
+
+                    <button class="dashboard-button" onclick="goToColleges()">
+
+                        Explore Colleges
+
+                    </button>
+
+                </div>
+
+
+                <!-- Compare Colleges -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        =
+                    </div>
+
+                    <h3>
+                        Compare Colleges
+                    </h3>
+
+                    <p>
+                        Compare college fees, ratings, placements,
+                        courses, and other important details.
+                    </p>
+
+                    <button class="dashboard-button" onclick="goToCompare()">
+
+                        Compare Colleges
+
+                    </button>
+
+                </div>
+
+
+                <!-- AI Advisor -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        AI
+                    </div>
+
+                    <h3>
+                        AI Advisor
+                    </h3>
+
+                    <p>
+                        Get personalized college recommendations
+                        according to your academic preferences.
+                    </p>
+
+                    <button class="dashboard-button" onclick="goToAIAdvisor()">
+
+                        Open AI Advisor
+
+                    </button>
+
+                </div>
+
+
+                <!-- Profile -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        P
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        View and manage your personal information,
+                        course preferences, and student details.
+                    </p>
+
+                    <button class="dashboard-button secondary" onclick="viewProfile()">
+
+                        Manage Profile
+
+                    </button>
+
+                </div>
+
+
+                <!-- Saved Colleges -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        S
+                    </div>
+
+                    <h3>
+                        Saved Colleges
+                    </h3>
+
+                    <p>
+                        Review the colleges you saved and keep track
+                        of your preferred institutions.
+                    </p>
+
+                    <button class="dashboard-button secondary" onclick="viewSavedColleges()">
+
+                        View Saved Colleges
+
+                    </button>
+
+                </div>
+
+
+                <!-- Find My College -->
+
+                <div class="dashboard-action-card">
+
+                    <div class="dashboard-action-icon">
+                        F
+                    </div>
+
+                    <h3>
+                        Find My College
+                    </h3>
+
+                    <p>
+                        Begin your college search using your preferred
+                        location, course, and budget.
+                    </p>
+
+                    <button class="dashboard-button secondary" onclick="findMyCollege()">
+
+                        Find My College
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PROFILE AND RECENT COLLEGES
+        ===================================== -->
+
+        <section class="dashboard-lower-grid">
+
+
+            <!-- Profile Summary -->
+
+            <div class="dashboard-panel">
+
+                <h2>
+                    Profile Summary
+                </h2>
+
+                <p class="dashboard-panel-description">
+                    Your current StudentLens profile information.
+                </p>
+
+
+                <div class="profile-summary">
+
+                    <div class="profile-summary-avatar" id="profileSummaryAvatar">
+
+                        S
+
+                    </div>
+
+                    <div>
+
+                        <h3 id="profileSummaryName">
+                            Student
+                        </h3>
+
+                        <p id="profileSummaryEmail">
+                            Profile information unavailable
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-detail-list">
+
+                    <div class="profile-detail-item">
+
+                        <span>
+                            Course
+                        </span>
+
+                        <span id="profileCourse">
+                            Not added
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-detail-item">
+
+                        <span>
+                            Location
+                        </span>
+
+                        <span id="profileLocation">
+                            Not added
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-detail-item">
+
+                        <span>
+                            Education
+                        </span>
+
+                        <span id="profileEducation">
+                            Not added
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="dashboard-button secondary" onclick="viewProfile()">
+
+                    Update Profile
+
+                </button>
+
+            </div>
+
+
+            <!-- Recently Viewed Colleges -->
+
+            <div class="dashboard-panel">
+
+                <h2>
+                    Recently Viewed
+                </h2>
+
+                <p class="dashboard-panel-description">
+                    Quickly return to colleges you recently explored.
+                </p>
+
+
+                <div class="recent-college-list" id="recentCollegeList">
+
+                    <div class="dashboard-empty-state">
+
+                        You have not viewed any colleges recently.
+                        Explore colleges to see them here.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             BOTTOM CALL TO ACTION
+        ===================================== -->
+
+        <section class="dashboard-bottom-cta">
+
+            <h2>
+                Your future. Your choice.
+            </h2>
+
+            <p>
+                Discover the right college with StudentLens.
+            </p>
+
+            <button class="dashboard-button" onclick="goToColleges()">
+
+                Start Exploring
+
+            </button>
+
+        </section>
+        
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ===================================== -->
+
+    <footer class="dashboard-footer">
+
+        StudentLens — Compare. Discover. Decide.
+
+    </footer>
+
+
+    <!-- =====================================
+         EXISTING PROJECT SCRIPT
+    ===================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../script.js"></script>
+
+
+    <!-- =====================================
+         DASHBOARD SCRIPT
+    ===================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            initializeDashboard();
+
+        });
+
+
+        function initializeDashboard() {
+
+            loadDashboardProfile();
+
+            loadDashboardSavedColleges();
+
+            loadRecentlyViewedColleges();
+
+        }
+
+
+        /* =====================================
+           PROFILE INFORMATION
+        ===================================== */
+
+        function loadDashboardProfile() {
+
+            const profileKeys = [
+                "studentLensProfile",
+                "studentProfile",
+                "profile"
+            ];
+
+            let profile = null;
+
+            for (const key of profileKeys) {
+
+                const storedProfile = localStorage.getItem(key);
+
+                if (!storedProfile) {
+                    continue;
+                }
+
+                try {
+
+                    profile = JSON.parse(storedProfile);
+
+                    if (profile && typeof profile === "object") {
+                        break;
+                    }
+
+                } catch (error) {
+
+                    console.warn("Unable to read profile data:", error);
+
+                }
+
+            }
+
+            if (!profile) {
+
+                updateText("dashboardUserName", "Student");
+                updateText("profileSummaryName", "Student");
+                updateText(
+                    "profileSummaryEmail",
+                    "Complete your profile to personalize StudentLens"
+                );
+
+                updateText("profileCourse", "Not added");
+                updateText("profileLocation", "Not added");
+                updateText("profileEducation", "Not added");
+
+                updateText("profileCompletion", "0%");
+
+                setAvatar("S");
+
+                return;
+
+            }
+
+
+            const name =
+                profile.name ||
+                profile.fullName ||
+                profile.username ||
+                "Student";
+
+            const email =
+                profile.email ||
+                profile.emailAddress ||
+                "Email not added";
+
+            const course =
+                profile.course ||
+                profile.branch ||
+                profile.interestedCourse ||
+                "Not added";
+
+            const location =
+                profile.location ||
+                profile.city ||
+                profile.preferredLocation ||
+                "Not added";
+
+            const education =
+                profile.education ||
+                profile.educationLevel ||
+                profile.qualification ||
+                "Not added";
+
+
+            updateText("dashboardUserName", name);
+            updateText("profileSummaryName", name);
+            updateText("profileSummaryEmail", email);
+
+            updateText("profileCourse", course);
+            updateText("profileLocation", location);
+            updateText("profileEducation", education);
+
+
+            const firstLetter = String(name)
+                .trim()
+                .charAt(0)
+                .toUpperCase() || "S";
+
+            setAvatar(firstLetter);
+
+
+            const completionFields = [
+                profile.name || profile.fullName,
+                profile.email || profile.emailAddress,
+                profile.course || profile.branch,
+                profile.location || profile.city,
+                profile.education || profile.educationLevel
+            ];
+
+            const completedFields = completionFields.filter(function (field) {
+
+                return field !== undefined &&
+                    field !== null &&
+                    String(field).trim() !== "";
+
+            }).length;
+
+
+            const completionPercentage =
+                Math.round((completedFields / completionFields.length) * 100);
+
+            updateText(
+                "profileCompletion",
+                `${completionPercentage}%`
+            );
+
+        }
+
+
+        function setAvatar(letter) {
+
+            updateText("dashboardAvatar", letter);
+            updateText("profileSummaryAvatar", letter);
+
+        }
+
+
+        function updateText(elementId, value) {
+
+            const element = document.getElementById(elementId);
+
+            if (element) {
+                element.textContent = value;
+            }
+
+        }
+
+
+        /* =====================================
+           SAVED COLLEGES
+        ===================================== */
+
+        function loadDashboardSavedColleges() {
+
+            const possibleKeys = [
+                "studentLensSavedColleges",
+                "savedColleges"
+            ];
+
+            let savedColleges = [];
+
+            for (const key of possibleKeys) {
+
+                const storedData = localStorage.getItem(key);
+
+                if (!storedData) {
+                    continue;
+                }
+
+                try {
+
+                    const parsedData = JSON.parse(storedData);
+
+                    if (Array.isArray(parsedData)) {
+
+                        savedColleges = parsedData;
+                        break;
+
+                    }
+
+                } catch (error) {
+
+                    console.warn("Unable to read saved colleges:", error);
+
+                }
+
+            }
+
+
+            updateText(
+                "savedCollegeCount",
+                savedColleges.length
+            );
+
+        }
+
+
+        /* =====================================
+           RECENTLY VIEWED COLLEGES
+        ===================================== */
+
+        function loadRecentlyViewedColleges() {
+
+            const possibleKeys = [
+                "studentLensRecentlyViewed",
+                "recentlyViewedColleges",
+                "recentColleges"
+            ];
+
+            let recentColleges = [];
+
+            for (const key of possibleKeys) {
+
+                const storedData = localStorage.getItem(key);
+
+                if (!storedData) {
+                    continue;
+                }
+
+                try {
+
+                    const parsedData = JSON.parse(storedData);
+
+                    if (Array.isArray(parsedData)) {
+
+                        recentColleges = parsedData;
+                        break;
+
+                    }
+
+                } catch (error) {
+
+                    console.warn("Unable to read recent colleges:", error);
+
+                }
+
+            }
+
+
+            updateText(
+                "recentCollegeCount",
+                recentColleges.length
+            );
+
+
+            const container = document.getElementById("recentCollegeList");
+
+            if (!container) {
+                return;
+            }
+
+
+            if (recentColleges.length === 0) {
+
+                container.innerHTML = `
+                    <div class="dashboard-empty-state">
+                        You have not viewed any colleges recently.
+                        Explore colleges to see them here.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            const limitedColleges = recentColleges.slice(0, 4);
+
+
+            container.innerHTML = limitedColleges.map(function (college) {
+
+                const collegeId =
+                    college.id ||
+                    college.collegeId ||
+                    "";
+
+                const collegeName =
+                    college.name ||
+                    college.collegeName ||
+                    "Unnamed College";
+
+                const collegeLocation =
+                    college.location ||
+                    college.city ||
+                    "Location unavailable";
+
+
+                return `
+                    <div class="recent-college-item">
+
+                        <div class="recent-college-info">
+
+                            <h3>
+                                ${escapeDashboardHTML(collegeName)}
+                            </h3>
+
+                            <p>
+                                ${escapeDashboardHTML(collegeLocation)}
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="dashboard-button secondary"
+                            onclick="openRecentCollege('${escapeDashboardHTML(String(collegeId))}')">
+
+                            View
+
+                        </button>
+
+                    </div>
+                `;
+
+            }).join("");
+
+        }
+
+
+        function openRecentCollege(collegeId) {
+
+            if (!collegeId) {
+
+                goToColleges();
+
+                return;
+
+            }
+
+            window.location.href =
+                `college-details.html?id=${encodeURIComponent(collegeId)}`;
+
+        }
+
+
+        function escapeDashboardHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        /* =====================================
+           DASHBOARD NAVIGATION
+        ===================================== */
+
+        function goToColleges() {
+
+            window.location.href = "colleges.html";
+
+        }
+
+
+        function goToCompare() {
+
+            window.location.href = "compare.html";
+
+        }
+
+
+        function goToAIAdvisor() {
+
+            window.location.href = "ai-advisor.html";
+
+        }
+
+
+        function viewProfile() {
+
+            window.location.href = "profile.html";
+
+        }
+
+
+        function viewSavedColleges() {
+
+            window.location.href = "saved-colleges.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

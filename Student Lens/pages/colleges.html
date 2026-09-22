@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Explore, search, filter, and compare colleges using StudentLens.">
+
+    <title>Explore Colleges | StudentLens</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Shared Redesign CSS -->
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+
+        .college-filter-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+        }
+
+        .design-search {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .design-search input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .design-search input:focus {
+            border-color: #0f9f8f;
+            box-shadow: 0 0 0 3px rgba(15, 159, 143, 0.12);
+            background: #ffffff;
+        }
+
+        .design-search button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #0f9f8f;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .design-search button:hover {
+            background: #0b8175;
+            transform: translateY(-1px);
+        }
+
+        .college-filters {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .filter-group select:focus {
+            border-color: #0f9f8f;
+            box-shadow: 0 0 0 3px rgba(15, 159, 143, 0.12);
+        }
+
+        .filter-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-result-text {
+            margin: 0;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .design-secondary,
+        .clear-search-button {
+            padding: 11px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .design-secondary {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+        }
+
+        .design-secondary:hover {
+            border-color: #0f9f8f;
+            color: #0f9f8f;
+            background: #f0fdfa;
+        }
+
+        .clear-search-button {
+            border: 1px solid #fecaca;
+            background: #fff1f2;
+            color: #be123c;
+        }
+
+        .clear-search-button:hover {
+            background: #ffe4e6;
+            border-color: #fda4af;
+        }
+
+        .college-results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .college-results-header h3 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 20px;
+        }
+
+        .college-results-header span {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .empty-college-state {
+            padding: 45px 20px;
+            text-align: center;
+            border: 1px dashed #cbd5e1;
+            border-radius: 16px;
+            background: #f8fafc;
+        }
+
+        .empty-college-state h3 {
+            margin: 0 0 8px;
+            color: #334155;
+        }
+
+        .empty-college-state p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        .college-loading-state {
+            grid-column: 1 / -1;
+            padding: 45px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .college-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .college-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.10);
+        }
+
+        .college-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .college-card-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .college-card-content h3 {
+            margin: 0 0 10px;
+            color: #0f172a;
+            font-size: 19px;
+            line-height: 1.4;
+        }
+
+        .college-card-location,
+        .college-card-type {
+            margin: 4px 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .college-card-description {
+            margin: 12px 0;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .college-card-details {
+            display: grid;
+            gap: 8px;
+            margin: 12px 0 18px;
+        }
+
+        .college-card-detail {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .college-card-detail strong {
+            color: #334155;
+        }
+
+        .college-card-detail span {
+            color: #64748b;
+            text-align: right;
+        }
+
+        .college-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .college-card-button {
+            flex: 1;
+            min-width: 100px;
+            padding: 11px 12px;
+            border-radius: 9px;
+            border: 1px solid #0f9f8f;
+            background: #0f9f8f;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .college-card-button:hover {
+            background: #0b8175;
+        }
+
+        .college-card-button.secondary {
+            border-color: #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+        }
+
+        .college-card-button.secondary:hover {
+            border-color: #0f9f8f;
+            background: #f0fdfa;
+            color: #0f9f8f;
+        }
+
+        .college-card-rating {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            width: fit-content;
+            margin-bottom: 12px;
+            padding: 5px 9px;
+            border-radius: 7px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1000px) {
+
+            .college-filters {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .college-filter-panel {
+                padding: 16px;
+                border-radius: 16px;
+            }
+
+            .design-search {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .design-search button {
+                width: 100%;
+            }
+
+            .college-filters {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .filter-actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .design-secondary,
+            .clear-search-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <header class="main-header">
+
+        <nav class="navbar">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="colleges.html" class="active">
+                    Colleges
+                </a>
+
+                <a href="compare.html">
+                    Compare
+                </a>
+
+                <a href="ai-advisor.html">
+                    AI Advisor
+                </a>
+
+                <a href="saved-colleges.html">
+                    Saved Colleges
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-link">
+                    Login
+                </a>
+
+                <a href="signup.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Page Header -->
+
+    <section class="inner-page-hero">
+
+        <p class="hero-label">
+            EXPLORE YOUR OPTIONS
+        </p>
+
+        <h1>
+            Find Your College
+        </h1>
+
+        <p>
+            Discover colleges based on your interests,
+            location, and academic goals.
+        </p>
+
+    </section>
+
+
+    <!-- College Search Section -->
+
+    <main class="page-main">
+
+        <div class="page-heading">
+
+            <h2>
+                Explore Colleges
+            </h2>
+
+            <p>
+                Search and filter colleges by name,
+                location, course, fees, and rating.
+            </p>
+
+        </div>
+
+
+        <!-- Search and Filter Section -->
+
+        <div class="college-filter-panel">
+
+            <div class="design-search">
+
+                <input
+                    type="text"
+                    id="collegeSearch"
+                    placeholder="Search by college name or location"
+                    aria-label="Search colleges"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    onclick="applyCollegeFilters()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+            <div class="college-filters">
+
+                <div class="filter-group">
+
+                    <label for="locationFilter">
+                        Location
+                    </label>
+
+                    <select id="locationFilter">
+
+                        <option value="">
+                            All Locations
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="courseFilter">
+                        Course
+                    </label>
+
+                    <select id="courseFilter">
+
+                        <option value="">
+                            All Courses
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="budgetFilter">
+                        Maximum Fees
+                    </label>
+
+                    <select id="budgetFilter">
+
+                        <option value="">
+                            Any Budget
+                        </option>
+
+                        <option value="100000">
+                            Below ₹1 Lakh
+                        </option>
+
+                        <option value="200000">
+                            Below ₹2 Lakhs
+                        </option>
+
+                        <option value="300000">
+                            Below ₹3 Lakhs
+                        </option>
+
+                        <option value="500000">
+                            Below ₹5 Lakhs
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="sortFilter">
+                        Sort By
+                    </label>
+
+                    <select id="sortFilter">
+
+                        <option value="">
+                            Default
+                        </option>
+
+                        <option value="rating-high">
+                            Rating: High to Low
+                        </option>
+
+                        <option value="rating-low">
+                            Rating: Low to High
+                        </option>
+
+                        <option value="fees-low">
+                            Fees: Low to High
+                        </option>
+
+                        <option value="fees-high">
+                            Fees: High to Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-actions">
+
+                <p
+                    class="filter-result-text"
+                    id="filterResultText"
+                >
+                    Loading colleges from database...
+                </p>
+
+                <div class="filter-buttons">
+
+                    <button
+                        type="button"
+                        class="secondary design-secondary"
+                        onclick="resetCollegeFilters()"
+                    >
+                        Reset Filters
+                    </button>
+
+                    <button
+                        type="button"
+                        class="clear-search-button"
+                        onclick="clearCollegeSearch()"
+                    >
+                        Clear Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Results Header -->
+
+        <div class="college-results-header">
+
+            <h3>
+                Available Colleges
+            </h3>
+
+            <span id="collegeResultsCount">
+                Loading colleges...
+            </span>
+
+        </div>
+
+
+        <!-- College Cards -->
+
+        <div
+            class="cards design-grid"
+            id="collegeContainer"
+        >
+
+            <div class="college-loading-state">
+                Loading colleges from Supabase...
+            </div>
+
+        </div>
+
+
+        <!-- No Results Message -->
+
+        <div
+            id="noCollegeMessage"
+            class="empty-college-state"
+            style="display: none;"
+        >
+
+            <h3>
+                No Colleges Found
+            </h3>
+
+            <p>
+                Try changing your search keywords or filters.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer class="new-footer">
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+            <p>
+                Discover the right college for your future.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html">
+                AI Advisor
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+
+        <p class="footer-copyright">
+
+            © 2026 StudentLens. All rights reserved.
+
+        </p>
+
+    </footer>
+
+
+    <!-- Supabase -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../supabase-config.js"></script>
+
+    <script src="../script.js"></script>
+
+
+    <!-- Page JavaScript -->
+
+    <script>
+
+        let allSupabaseColleges = [];
+
+        let filteredSupabaseColleges = [];
+
+
+        function escapeCollegeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function getCollegeFeesValue(fees) {
+
+            if (fees === null || fees === undefined) {
+                return 0;
+            }
+
+            const feeText = String(fees)
+                .toLowerCase()
+                .replace(/,/g, "")
+                .replace(/₹/g, "")
+                .trim();
+
+            const numberMatch = feeText.match(/[\d.]+/);
+
+            if (!numberMatch) {
+                return 0;
+            }
+
+            const number = Number(numberMatch[0]);
+
+            if (feeText.includes("lakh") || feeText.includes("lac")) {
+                return number * 100000;
+            }
+
+            if (feeText.includes("k")) {
+                return number * 1000;
+            }
+
+            return number;
+
+        }
+
+
+        function getCollegeCourses(college) {
+
+            if (!college.courses) {
+                return [];
+            }
+
+            if (Array.isArray(college.courses)) {
+                return college.courses;
+            }
+
+            return String(college.courses)
+                .split(",")
+                .map(course => course.trim())
+                .filter(Boolean);
+
+        }
+
+
+        function getCollegeImage(college) {
+
+            if (college.image_url && college.image_url.trim() !== "") {
+                return college.image_url;
+            }
+
+            return "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80";
+
+        }
+
+
+        function populateCollegeFilters() {
+
+            const locationFilter = document.getElementById("locationFilter");
+            const courseFilter = document.getElementById("courseFilter");
+
+            if (!locationFilter || !courseFilter) {
+                return;
+            }
+
+            const locations = [
+                ...new Set(
+                    allSupabaseColleges
+                        .map(college => college.location)
+                        .filter(Boolean)
+                )
+            ].sort();
+
+            const courses = [];
+
+            allSupabaseColleges.forEach(college => {
+
+                getCollegeCourses(college).forEach(course => {
+
+                    if (!courses.includes(course)) {
+                        courses.push(course);
+                    }
+
+                });
+
+            });
+
+            courses.sort((a, b) => a.localeCompare(b));
+
+            locationFilter.innerHTML = `
+                <option value="">All Locations</option>
+                ${locations.map(location => `
+                    <option value="${escapeCollegeHTML(location)}">
+                        ${escapeCollegeHTML(location)}
+                    </option>
+                `).join("")}
+            `;
+
+            courseFilter.innerHTML = `
+                <option value="">All Courses</option>
+                ${courses.map(course => `
+                    <option value="${escapeCollegeHTML(course)}">
+                        ${escapeCollegeHTML(course)}
+                    </option>
+                `).join("")}
+            `;
+
+        }
+
+
+        async function loadCollegesFromSupabase() {
+
+            const container = document.getElementById("collegeContainer");
+            const countText = document.getElementById("collegeResultsCount");
+            const resultText = document.getElementById("filterResultText");
+
+            try {
+
+                if (!window.supabaseClient) {
+
+                    throw new Error(
+                        "Supabase client is not initialized. Check supabase-config.js."
+                    );
+
+                }
+
+                const {
+                    data,
+                    error
+                } = await window.supabaseClient
+                    .from("colleges")
+                    .select("*")
+                    .order("id", {
+                        ascending: true
+                    });
+
+                if (error) {
+                    throw error;
+                }
+
+                allSupabaseColleges = Array.isArray(data) ? data : [];
+
+                populateCollegeFilters();
+
+                applyCollegeFilters();
+
+                if (resultText) {
+                    resultText.textContent =
+                        `${allSupabaseColleges.length} colleges loaded from database.`;
+                }
+
+            } catch (error) {
+
+                console.error("Supabase college loading error:", error);
+
+                if (container) {
+
+                    container.innerHTML = `
+                        <div class="college-loading-state">
+                            Unable to load colleges. Please check your Supabase connection.
+                        </div>
+                    `;
+
+                }
+
+                if (countText) {
+                    countText.textContent = "Unable to load colleges";
+                }
+
+                if (resultText) {
+                    resultText.textContent =
+                        "Database connection failed. Check the browser console.";
+                }
+
+            }
+
+        }
+
+
+        function renderCollegeCards(colleges) {
+
+            const container = document.getElementById("collegeContainer");
+            const noCollegeMessage = document.getElementById("noCollegeMessage");
+            const countText = document.getElementById("collegeResultsCount");
+
+            if (!container) {
+                return;
+            }
+
+            if (countText) {
+                countText.textContent =
+                    `${colleges.length} college${colleges.length === 1 ? "" : "s"} found`;
+            }
+
+            if (colleges.length === 0) {
+
+                container.innerHTML = "";
+
+                if (noCollegeMessage) {
+                    noCollegeMessage.style.display = "block";
+                }
+
+                return;
+
+            }
+
+            if (noCollegeMessage) {
+                noCollegeMessage.style.display = "none";
+            }
+
+            container.innerHTML = colleges.map(college => {
+
+                const courses = getCollegeCourses(college);
+
+                const collegeId = escapeCollegeHTML(college.id);
+                const collegeName = escapeCollegeHTML(college.name);
+                const location = escapeCollegeHTML(college.location || "Location unavailable");
+                const type = escapeCollegeHTML(college.type || "College");
+                const rating = escapeCollegeHTML(college.rating || "Not rated");
+                const fees = escapeCollegeHTML(college.fees || "Not available");
+                const placement = escapeCollegeHTML(college.placement || "Not available");
+                const description = escapeCollegeHTML(
+                    college.description || "Explore this college and discover available opportunities."
+                );
+                const imageURL = escapeCollegeHTML(getCollegeImage(college));
+
+                return `
+
+                    <article class="college-card">
+
+                        <img
+                            src="${imageURL}"
+                            alt="${collegeName}"
+                            class="college-card-image"
+                            loading="lazy"
+                            onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80';"
+                        >
+
+                        <div class="college-card-content">
+
+                            <span class="college-card-rating">
+                                ★ ${rating}
+                            </span>
+
+                            <h3>
+                                ${collegeName}
+                            </h3>
+
+                            <p class="college-card-location">
+                                Location: ${location}
+                            </p>
+
+                            <p class="college-card-type">
+                                Type: ${type}
+                            </p>
+
+                            <p class="college-card-description">
+                                ${description}
+                            </p>
+
+                            <div class="college-card-details">
+
+                                <div class="college-card-detail">
+                                    <strong>Fees</strong>
+                                    <span>${fees}</span>
+                                </div>
+
+                                <div class="college-card-detail">
+                                    <strong>Placement</strong>
+                                    <span>${placement}</span>
+                                </div>
+
+                                <div class="college-card-detail">
+                                    <strong>Courses</strong>
+                                    <span>
+                                        ${escapeCollegeHTML(
+                                            courses.length > 0
+                                                ? courses.slice(0, 2).join(", ")
+                                                : "Not available"
+                                        )}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="college-card-actions">
+
+                                <button
+                                    type="button"
+                                    class="college-card-button"
+                                    onclick="viewSupabaseCollege('${collegeId}')"
+                                >
+                                    View Details
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="college-card-button secondary"
+                                    onclick="saveSupabaseCollege('${collegeId}')"
+                                >
+                                    Save
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }).join("");
+
+        }
+
+
+        function applyCollegeFilters() {
+
+            const searchInput = document.getElementById("collegeSearch");
+            const locationFilter = document.getElementById("locationFilter");
+            const courseFilter = document.getElementById("courseFilter");
+            const budgetFilter = document.getElementById("budgetFilter");
+            const sortFilter = document.getElementById("sortFilter");
+            const resultText = document.getElementById("filterResultText");
+
+            const searchValue = searchInput
+                ? searchInput.value.trim().toLowerCase()
+                : "";
+
+            const selectedLocation = locationFilter
+                ? locationFilter.value.trim().toLowerCase()
+                : "";
+
+            const selectedCourse = courseFilter
+                ? courseFilter.value.trim().toLowerCase()
+                : "";
+
+            const selectedBudget = budgetFilter
+                ? Number(budgetFilter.value)
+                : 0;
+
+            const selectedSort = sortFilter
+                ? sortFilter.value
+                : "";
+
+            filteredSupabaseColleges = allSupabaseColleges.filter(college => {
+
+                const collegeName = String(college.name || "").toLowerCase();
+                const collegeLocation = String(college.location || "").toLowerCase();
+
+                const courses = getCollegeCourses(college)
+                    .map(course => String(course).toLowerCase());
+
+                const collegeFees = getCollegeFeesValue(college.fees);
+
+                const matchesSearch =
+                    !searchValue ||
+                    collegeName.includes(searchValue) ||
+                    collegeLocation.includes(searchValue);
+
+                const matchesLocation =
+                    !selectedLocation ||
+                    collegeLocation === selectedLocation;
+
+                const matchesCourse =
+                    !selectedCourse ||
+                    courses.some(course => course.includes(selectedCourse));
+
+                const matchesBudget =
+                    !selectedBudget ||
+                    collegeFees <= selectedBudget;
+
+                return (
+                    matchesSearch &&
+                    matchesLocation &&
+                    matchesCourse &&
+                    matchesBudget
+                );
+
+            });
+
+            if (selectedSort === "rating-high") {
+
+                filteredSupabaseColleges.sort(
+                    (a, b) => Number(b.rating || 0) - Number(a.rating || 0)
+                );
+
+            } else if (selectedSort === "rating-low") {
+
+                filteredSupabaseColleges.sort(
+                    (a, b) => Number(a.rating || 0) - Number(b.rating || 0)
+                );
+
+            } else if (selectedSort === "fees-low") {
+
+                filteredSupabaseColleges.sort(
+                    (a, b) =>
+                        getCollegeFeesValue(a.fees) -
+                        getCollegeFeesValue(b.fees)
+                );
+
+            } else if (selectedSort === "fees-high") {
+
+                filteredSupabaseColleges.sort(
+                    (a, b) =>
+                        getCollegeFeesValue(b.fees) -
+                        getCollegeFeesValue(a.fees)
+                );
+
+            }
+
+            renderCollegeCards(filteredSupabaseColleges);
+
+            if (resultText) {
+
+                resultText.textContent =
+                    `${filteredSupabaseColleges.length} matching college${filteredSupabaseColleges.length === 1 ? "" : "s"} found.`;
+
+            }
+
+        }
+
+
+        function resetCollegeFilters() {
+
+            const locationFilter = document.getElementById("locationFilter");
+            const courseFilter = document.getElementById("courseFilter");
+            const budgetFilter = document.getElementById("budgetFilter");
+            const sortFilter = document.getElementById("sortFilter");
+
+            if (locationFilter) {
+                locationFilter.value = "";
+            }
+
+            if (courseFilter) {
+                courseFilter.value = "";
+            }
+
+            if (budgetFilter) {
+                budgetFilter.value = "";
+            }
+
+            if (sortFilter) {
+                sortFilter.value = "";
+            }
+
+            applyCollegeFilters();
+
+        }
+
+
+        function clearCollegeSearch() {
+
+            const searchInput = document.getElementById("collegeSearch");
+
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+            applyCollegeFilters();
+
+        }
+
+
+        function viewSupabaseCollege(collegeId) {
+
+            window.location.href =
+                "college-details.html?id=" +
+                encodeURIComponent(collegeId);
+
+        }
+
+
+        
+async function saveSupabaseCollege(collegeId) {
+    try {
+        // Check whether the user is logged in
+        const { data: userData, error: userError } =
+            await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+            alert("Please log in to save a college.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const user = userData.user;
+        const numericCollegeId = Number(collegeId);
+
+        if (!Number.isInteger(numericCollegeId)) {
+            console.error("Invalid college ID:", collegeId);
+            alert("Invalid college ID.");
+            return;
+        }
+
+        // Check whether this college is already saved
+        const { data: existingCollege, error: checkError } =
+            await supabaseClient
+                .from("saved_colleges")
+                .select("id")
+                .eq("user_id", user.id)
+                .eq("college_id", numericCollegeId)
+                .maybeSingle();
+
+        if (checkError) {
+            console.error("Check saved college error:", checkError);
+            alert("Unable to check saved college.");
+            return;
+        }
+
+        if (existingCollege) {
+            alert("This college is already saved.");
+            return;
+        }
+
+        // Insert the college into Supabase
+        const { data, error: insertError } =
+            await supabaseClient
+                .from("saved_colleges")
+                .insert({
+                    user_id: user.id,
+                    college_id: numericCollegeId
+                })
+                .select();
+
+        if (insertError) {
+            console.error("Supabase save error:", insertError);
+            alert("Unable to save college. Please try again.");
+            return;
+        }
+
+        // Keep localStorage updated for compatibility
+        let savedCollegeIds = [];
+
+        const storedSavedColleges =
+            localStorage.getItem("studentLensSavedColleges");
+
+        if (storedSavedColleges) {
+            try {
+                const parsedSavedColleges =
+                    JSON.parse(storedSavedColleges);
+
+                if (Array.isArray(parsedSavedColleges)) {
+                    savedCollegeIds = parsedSavedColleges.map(String);
+                }
+            } catch (storageError) {
+                console.warn(
+                    "Unable to read localStorage saved colleges:",
+                    storageError
+                );
+            }
+        }
+
+        if (!savedCollegeIds.includes(String(numericCollegeId))) {
+            savedCollegeIds.push(String(numericCollegeId));
+
+            localStorage.setItem(
+                "studentLensSavedColleges",
+                JSON.stringify(savedCollegeIds)
+            );
+        }
+
+        alert("College saved successfully.");
+
+        console.log("Saved college:", data);
+
+    } catch (error) {
+        console.error("Save college error:", error);
+        alert("Unable to save this college.");
+    }
+}
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const searchInput = document.getElementById("collegeSearch");
+
+            const locationFilter = document.getElementById("locationFilter");
+            const courseFilter = document.getElementById("courseFilter");
+            const budgetFilter = document.getElementById("budgetFilter");
+            const sortFilter = document.getElementById("sortFilter");
+
+            if (searchInput) {
+
+                searchInput.addEventListener("keydown", function (event) {
+
+                    if (event.key === "Enter") {
+
+                        event.preventDefault();
+
+                        applyCollegeFilters();
+
+                    }
+
+                });
+
+                searchInput.addEventListener("input", function () {
+
+                    applyCollegeFilters();
+
+                });
+
+            }
+
+            if (locationFilter) {
+                locationFilter.addEventListener(
+                    "change",
+                    applyCollegeFilters
+                );
+            }
+
+            if (courseFilter) {
+                courseFilter.addEventListener(
+                    "change",
+                    applyCollegeFilters
+                );
+            }
+
+            if (budgetFilter) {
+                budgetFilter.addEventListener(
+                    "change",
+                    applyCollegeFilters
+                );
+            }
+
+            if (sortFilter) {
+                sortFilter.addEventListener(
+                    "change",
+                    applyCollegeFilters
+                );
+            }
+
+            loadCollegesFromSupabase();
+
+        });
+
+    </script>
+
+</body>
+
+</html>

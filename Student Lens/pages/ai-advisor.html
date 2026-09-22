@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Find personalized college recommendations based on your course, location, budget, and priorities using StudentLens AI Advisor.">
+
+    <title>AI College Advisor | StudentLens</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+        /* =========================================
+           AI ADVISOR PAGE
+           ========================================= */
+
+        .advisor-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 24px 70px;
+        }
+
+        .advisor-form-section {
+            width: 100%;
+        }
+
+        .advisor-form-card {
+            margin-top: 30px;
+            padding: 34px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.05);
+        }
+
+        .advisor-form-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 26px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .advisor-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .advisor-form-header h3 {
+            margin: 0 0 6px;
+            color: #0f172a;
+            font-size: 21px;
+        }
+
+        .advisor-form-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .advisor-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+        }
+
+        .advisor-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advisor-form-group label {
+            margin-bottom: 9px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .advisor-form-group input,
+        .advisor-form-group select {
+            width: 100%;
+            min-height: 48px;
+            box-sizing: border-box;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #0f172a;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .advisor-form-group input:focus,
+        .advisor-form-group select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .advisor-form-group small {
+            margin-top: 8px;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .advisor-form-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 32px;
+            padding-top: 28px;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .advisor-submit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-width: 250px;
+            min-height: 50px;
+            padding: 13px 24px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .advisor-submit-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .advisor-form-action p {
+            max-width: 560px;
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .advisor-results-section {
+            margin-top: 65px;
+            scroll-margin-top: 30px;
+        }
+
+        .advisor-results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .advisor-results-grid:empty {
+            display: none;
+        }
+
+        .advisor-bottom-section {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 900px) {
+
+            .advisor-results-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .advisor-main {
+                padding: 35px 16px 50px;
+            }
+
+            .advisor-form-card {
+                padding: 24px 20px;
+            }
+
+            .advisor-form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .advisor-form-header {
+                align-items: flex-start;
+            }
+
+            .advisor-submit-button {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .advisor-results-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+         ========================================= -->
+
+    <nav class="main-navbar">
+
+        <div class="logo">
+
+            <a href="../index.html" class="logo-link">
+
+                <span class="logo-icon" aria-hidden="true">
+
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                        <path d="M3 9L12 4L21 9L12 14L3 9Z" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+
+                        <path d="M6 11.2V16C9.4 19 14.6 19 18 16V11.2" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+
+                        <path d="M21 9V15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html" class="active">
+                AI Advisor
+            </a>
+
+            <a href="saved-colleges.html">
+                Saved Colleges
+            </a>
+
+        </div>
+
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="login-link">Login</a>
+
+            <a href="signup.html" class="nav-button">Get Started</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         PAGE HERO
+         ========================================= -->
+
+    <header class="page-hero advisor-page-hero">
+
+        <div class="page-hero-content">
+
+            <span class="section-label">
+                PERSONALIZED GUIDANCE
+            </span>
+
+            <h1>
+                AI College
+                <span>Advisor</span>
+            </h1>
+
+            <p>
+                Share your preferences and discover colleges
+                that match your interests, budget, location,
+                and career goals.
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         ADVISOR FORM
+         ========================================= -->
+
+    <main class="advisor-main">
+
+        <section class="advisor-form-section">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    YOUR PREFERENCES
+                </span>
+
+                <h2>
+                    Tell Us About Yourself
+                </h2>
+
+                <p>
+                    Provide a few details to receive
+                    personalized college recommendations.
+                </p>
+
+            </div>
+
+
+
+            <div class="advisor-form-card">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="advisor-form-header">
+
+                    <div class="advisor-icon" aria-hidden="true">
+
+                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                            <path
+                                d="M12 3L14.8 8.2L20.5 9.3L16.5 13.4L17.2 19.1L12 16.6L6.8 19.1L7.5 13.4L3.5 9.3L9.2 8.2L12 3Z"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                                stroke-linejoin="round" />
+
+                        </svg>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Find Your College Match
+                        </h3>
+
+                        <p>
+                            Enter your preferences below.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- FORM FIELDS -->
+
+                <div class="advisor-form-grid">
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group advisor-form-group">
+
+                        <label for="advisorLocation">
+                            Preferred Location
+                        </label>
+
+                        <input type="text" id="advisorLocation" placeholder="Example: Vijayawada"
+                            autocomplete="address-level2">
+
+                        <small>
+                            Enter your preferred city or region.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- COURSE -->
+
+                    <div class="form-group advisor-form-group">
+
+                        <label for="advisorCourse">
+                            Preferred Course
+                        </label>
+
+                        <input type="text" id="advisorCourse" placeholder="Example: Information Technology">
+
+                        <small>
+                            Enter your preferred degree or branch.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- BUDGET -->
+
+                    <div class="form-group advisor-form-group">
+
+                        <label for="advisorBudget">
+                            Maximum Fees
+                        </label>
+
+                        <select id="advisorBudget">
+
+                            <option value="">
+                                Select Budget
+                            </option>
+
+                            <option value="1">
+                                Below ₹1 Lakh
+                            </option>
+
+                            <option value="2">
+                                ₹1 - ₹2 Lakhs
+                            </option>
+
+                            <option value="3">
+                                ₹2 - ₹3 Lakhs
+                            </option>
+
+                            <option value="4">
+                                Above ₹3 Lakhs
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Select your maximum fee range.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- PRIORITY -->
+
+                    <div class="form-group advisor-form-group">
+
+                        <label for="advisorPriority">
+                            What Matters Most?
+                        </label>
+
+                        <select id="advisorPriority">
+
+                            <option value="">
+                                Select Priority
+                            </option>
+
+                            <option value="fees">
+                                Lower Fees
+                            </option>
+
+                            <option value="placement">
+                                Better Placements
+                            </option>
+
+                            <option value="rating">
+                                College Rating
+                            </option>
+
+                            <option value="location">
+                                Location
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Choose the factor most important to you.
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FORM ACTION -->
+
+                <div class="advisor-form-action">
+
+                    <button type="button" class="primary advisor-submit-button" onclick="getAIRecommendation()">
+
+                        <span>
+                            Get My Recommendations
+                        </span>
+
+                        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+
+                            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+                            <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+
+                        </svg>
+
+                    </button>
+
+                    <p>
+                        Recommendations are based on the available
+                        college data and your selected preferences.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             AI RESULTS
+             ========================================= -->
+
+        <section class="advisor-results-section" id="aiResultSection" style="display: none;" aria-live="polite">
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    YOUR RESULTS
+                </span>
+
+                <h2>
+                    Recommended Colleges
+                </h2>
+
+                <p>
+                    Explore colleges that match your preferences.
+                </p>
+
+            </div>
+
+
+            <div class="cards advisor-results-grid" id="aiResults">
+
+                <!-- Recommendations are generated by script.js -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         BOTTOM CTA
+         ========================================= -->
+
+    <section class="bottom advisor-bottom-section">
+
+        <div class="bottom-content">
+
+            <span class="section-label bottom-label">
+                YOUR FUTURE STARTS HERE
+            </span>
+
+            <h2>
+                Find a College That Fits Your Future
+            </h2>
+
+            <p>
+                Explore your options, compare colleges,
+                and make a more informed decision.
+            </p>
+
+            <a href="colleges.html" class="primary bottom-button">
+                Explore Colleges
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../script.js"></script>
+
+</body>
+
+</html>

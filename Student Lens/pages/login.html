@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Login to StudentLens and continue your college discovery journey.">
+
+    <title>StudentLens - Login</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+
+        /* =========================================
+           LOGIN PAGE
+        ========================================= */
+
+        .login-page {
+            min-height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            background: #f8fafc;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card {
+            padding: 38px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .login-header h1 {
+            margin: 0 0 10px;
+            color: #172554;
+            font-size: 30px;
+        }
+
+        .login-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group label {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            background: #ffffff;
+            color: #0f172a;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .login-button {
+            width: 100%;
+            margin-top: 5px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .login-button:hover {
+            background: #1d4ed8;
+        }
+
+        .login-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .login-message {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .login-message.success {
+            display: block;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .login-message.error {
+            display: block;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #b91c1c;
+        }
+
+        .signup-text {
+            margin-top: 24px;
+            color: #64748b;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-text a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        .login-note {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+
+            .login-page {
+                padding: 35px 16px 55px;
+            }
+
+            .login-card {
+                padding: 26px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
+
+    <header class="main-header">
+
+        <nav class="navbar">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="colleges.html">
+                    Colleges
+                </a>
+
+                <a href="compare.html">
+                    Compare
+                </a>
+
+                <a href="ai-advisor.html">
+                    AI Advisor
+                </a>
+
+                <a href="saved-colleges.html">
+                    Saved Colleges
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-link">
+                    Login
+                </a>
+
+                <a href="signup.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         LOGIN SECTION
+    ========================================= -->
+
+    <main class="login-page">
+
+        <div class="login-container">
+
+            <div class="login-card">
+
+
+                <!-- Header -->
+
+                <div class="login-header">
+
+                    <div class="login-icon">
+                        S
+                    </div>
+
+                    <h1>
+                        Welcome Back
+                    </h1>
+
+                    <p>
+                        Login to continue your StudentLens journey.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Login Form -->
+
+                <form id="loginForm" class="login-form">
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Login Message -->
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                        role="alert"
+                        aria-live="polite">
+                    </div>
+
+
+
+                    <!-- Login Button -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button">
+
+                        Login
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- Signup -->
+
+                <p class="signup-text">
+
+                    Don't have an account?
+
+                    <a href="signup.html">
+                        Create Account
+                    </a>
+
+                </p>
+
+
+                <p class="login-note">
+
+                    Your account is securely managed by Supabase
+                    Authentication.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="new-footer">
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+            <p>
+                Discover the right college for your future.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html">
+                AI Advisor
+            </a>
+
+            <a href="saved-colleges.html">
+                Saved Colleges
+            </a>
+
+            <a href="signup.html">
+                Sign Up
+            </a>
+
+        </div>
+
+
+        <p class="footer-copyright">
+
+            © 2026 StudentLens. All rights reserved.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         SUPABASE SCRIPTS
+    ========================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../supabase-config.js"></script>
+
+    <script src="../script.js"></script>
+
+
+
+    <!-- =========================================
+         SUPABASE LOGIN FUNCTIONALITY
+    ========================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const loginForm =
+                document.getElementById("loginForm");
+
+            const loginMessage =
+                document.getElementById("loginMessage");
+
+            const loginButton =
+                document.getElementById("loginButton");
+
+
+            if (!loginForm) {
+                return;
+            }
+
+
+            function showLoginMessage(message, type) {
+
+                loginMessage.textContent = message;
+
+                loginMessage.className =
+                    "login-message " + type;
+
+            }
+
+
+            function setLoadingState(isLoading) {
+
+                loginButton.disabled = isLoading;
+
+                loginButton.textContent = isLoading
+                    ? "Logging In..."
+                    : "Login";
+
+            }
+
+
+            function getReadableLoginError(error) {
+
+                if (!error || !error.message) {
+
+                    return "Something went wrong. Please try again.";
+
+                }
+
+
+                const message =
+                    error.message.toLowerCase();
+
+
+                if (
+                    message.includes("invalid login credentials") ||
+                    message.includes("invalid credentials")
+                ) {
+
+                    return "Invalid email or password. Please try again.";
+
+                }
+
+
+                if (
+                    message.includes("email not confirmed")
+                ) {
+
+                    return "Please confirm your email before logging in.";
+
+                }
+
+
+                if (
+                    message.includes("too many requests") ||
+                    message.includes("rate limit")
+                ) {
+
+                    return "Too many login attempts. Please try again later.";
+
+                }
+
+
+                return error.message;
+
+            }
+
+
+            loginForm.addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const email =
+                        document.getElementById("loginEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                    const password =
+                        document.getElementById("loginPassword")
+                        .value;
+
+
+
+                    // =====================================
+                    // CHECK SUPABASE CONFIGURATION
+                    // =====================================
+
+                    if (
+                        typeof window.supabaseClient ===
+                        "undefined"
+                    ) {
+
+                        showLoginMessage(
+                            "Supabase is not configured correctly. Check supabase-config.js.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    // =====================================
+                    // START LOGIN
+                    // =====================================
+
+                    setLoadingState(true);
+
+
+                    showLoginMessage(
+                        "Signing you in...",
+                        "success"
+                    );
+
+
+                    try {
+
+                        const {
+                            data,
+                            error
+                        } =
+                            await window.supabaseClient.auth.signInWithPassword({
+
+                                email: email,
+
+                                password: password
+
+                            });
+
+
+
+                        if (error) {
+
+                            throw error;
+
+                        }
+
+
+                        if (
+                            !data ||
+                            !data.user ||
+                            !data.session
+                        ) {
+
+                            throw new Error(
+                                "Login failed. No active session was created."
+                            );
+
+                        }
+
+
+
+                        // =================================
+                        // GET USER PROFILE
+                        // =================================
+
+                        let userName =
+                            data.user.user_metadata?.full_name ||
+                            data.user.email;
+
+
+                        const {
+                            data: profile,
+                            error: profileError
+                        } =
+                            await window.supabaseClient
+                            .from("profiles")
+                            .select("name, email")
+                            .eq("id", data.user.id)
+                            .maybeSingle();
+
+
+                        if (profileError) {
+
+                            console.warn(
+                                "Profile loading warning:",
+                                profileError
+                            );
+
+                        }
+
+
+                        if (
+                            profile &&
+                            profile.name
+                        ) {
+
+                            userName = profile.name;
+
+                        }
+
+
+
+                        // =================================
+                        // STORE SESSION USER
+                        // =================================
+
+                        /*
+                         * Supabase manages the authentication
+                         * session automatically.
+                         *
+                         * This localStorage entry is retained
+                         * for compatibility with existing
+                         * StudentLens dashboard code.
+                         */
+
+                        const loggedInUser = {
+
+                            id: data.user.id,
+
+                            name: userName,
+
+                            email: data.user.email
+
+                        };
+
+
+                        localStorage.setItem(
+                            "studentLensLoggedInUser",
+                            JSON.stringify(loggedInUser)
+                        );
+
+
+
+                        // =================================
+                        // LOGIN SUCCESS
+                        // =================================
+
+                        showLoginMessage(
+                            "Login successful. Redirecting to dashboard...",
+                            "success"
+                        );
+
+
+                        loginForm.reset();
+
+
+                        setTimeout(function () {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        }, 700);
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Supabase login error:",
+                            error
+                        );
+
+
+                        showLoginMessage(
+                            getReadableLoginError(error),
+                            "error"
+                        );
+
+
+                        setLoadingState(false);
+
+                    }
+
+                }
+            );
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

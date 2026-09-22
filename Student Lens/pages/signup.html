@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Create your StudentLens account and discover the right college for your future.">
+
+    <title>Create Account | StudentLens</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="stylesheet" href="../css/redesign.css">
+
+    <style>
+
+        /* =========================================
+           SIGNUP PAGE
+        ========================================= */
+
+        .auth-page {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 80px;
+            background: #f8fafc;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .auth-card {
+            padding: 38px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .auth-header h1 {
+            margin: 0 0 10px;
+            color: #172554;
+            font-size: 30px;
+        }
+
+        .auth-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group label {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            background: #ffffff;
+            color: #0f172a;
+            font-size: 14px;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .form-group input::placeholder {
+            color: #94a3b8;
+        }
+
+        .auth-submit {
+            width: 100%;
+            margin-top: 5px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .auth-submit:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .auth-submit:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-message {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .auth-message.success {
+            display: block;
+            border: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .auth-message.error {
+            display: block;
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .auth-footer {
+            margin-top: 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .auth-footer a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-note {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+
+            .auth-page {
+                padding: 35px 16px 55px;
+            }
+
+            .auth-card {
+                padding: 26px 20px;
+                border-radius: 16px;
+            }
+
+            .auth-header h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
+
+    <header class="main-header">
+
+        <nav class="navbar">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="colleges.html">
+                    Colleges
+                </a>
+
+                <a href="compare.html">
+                    Compare
+                </a>
+
+                <a href="ai-advisor.html">
+                    AI Advisor
+                </a>
+
+                <a href="saved-colleges.html">
+                    Saved Colleges
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-link">
+                    Login
+                </a>
+
+                <a href="signup.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         SIGNUP SECTION
+    ========================================= -->
+
+    <main class="auth-page">
+
+        <div class="auth-container">
+
+            <div class="auth-card">
+
+
+                <!-- Header -->
+
+                <div class="auth-header">
+
+                    <div class="auth-icon">
+                        S
+                    </div>
+
+                    <h1>
+                        Create Your Account
+                    </h1>
+
+                    <p>
+                        Join StudentLens and discover the right
+                        college for your future.
+                    </p>
+
+                </div>
+
+
+
+                <!-- Signup Form -->
+
+                <form id="signupForm" class="auth-form">
+
+
+                    <!-- Full Name -->
+
+                    <div class="form-group">
+
+                        <label for="signupName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="signupEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="signupPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="signupPassword"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="form-group">
+
+                        <label for="signupConfirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="signupConfirmPassword"
+                            name="confirmPassword"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Message -->
+
+                    <div
+                        id="signupMessage"
+                        class="auth-message"
+                        role="alert"
+                        aria-live="polite">
+                    </div>
+
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        id="signupSubmit"
+                        class="auth-submit">
+
+                        Create Account
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- Login Link -->
+
+                <div class="auth-footer">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login here
+                    </a>
+
+                </div>
+
+
+
+                <p class="auth-note">
+
+                    Your account is securely managed by Supabase
+                    Authentication.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="new-footer">
+
+        <div class="footer-brand">
+
+            <a href="../index.html" class="brand-logo">
+
+                <span class="brand-icon">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                        <path d="M2 9L12 4L22 9L12 14L2 9Z"></path>
+
+                        <path d="M6 11V16C9 19 15 19 18 16V11"></path>
+
+                        <path d="M22 9V15"></path>
+
+                    </svg>
+
+                </span>
+
+                <span>StudentLens</span>
+
+            </a>
+
+            <p>
+                Discover the right college for your future.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="colleges.html">
+                Colleges
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a href="ai-advisor.html">
+                AI Advisor
+            </a>
+
+            <a href="saved-colleges.html">
+                Saved Colleges
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+
+        <p class="footer-copyright">
+
+            © 2026 StudentLens. All rights reserved.
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         SUPABASE SCRIPTS
+    ========================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../supabase-config.js"></script>
+
+    <script src="../script.js"></script>
+
+
+
+    <!-- =========================================
+         SUPABASE SIGNUP FUNCTIONALITY
+    ========================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const signupForm =
+                document.getElementById("signupForm");
+
+            const signupMessage =
+                document.getElementById("signupMessage");
+
+            const signupSubmit =
+                document.getElementById("signupSubmit");
+
+
+            if (!signupForm) {
+                return;
+            }
+
+
+            function showSignupMessage(message, type) {
+
+                signupMessage.textContent = message;
+
+                signupMessage.className =
+                    "auth-message " + type;
+
+            }
+
+
+            function setLoadingState(isLoading) {
+
+                signupSubmit.disabled = isLoading;
+
+                signupSubmit.textContent = isLoading
+                    ? "Creating Account..."
+                    : "Create Account";
+
+            }
+
+
+            function getReadableSignupError(error) {
+
+                if (!error || !error.message) {
+                    return "Something went wrong. Please try again.";
+                }
+
+
+                const message =
+                    error.message.toLowerCase();
+
+
+                if (
+                    message.includes("user already registered") ||
+                    message.includes("already registered")
+                ) {
+
+                    return "An account with this email already exists.";
+
+                }
+
+
+                if (
+                    message.includes("password") &&
+                    message.includes("6")
+                ) {
+
+                    return "Password must contain at least 6 characters.";
+
+                }
+
+
+                if (message.includes("invalid email")) {
+
+                    return "Please enter a valid email address.";
+
+                }
+
+
+                if (message.includes("rate limit")) {
+
+                    return "Too many attempts. Please try again later.";
+
+                }
+
+
+                return error.message;
+
+            }
+
+
+            signupForm.addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const name =
+                        document.getElementById("signupName")
+                        .value
+                        .trim();
+
+
+                    const email =
+                        document.getElementById("signupEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                    const password =
+                        document.getElementById("signupPassword")
+                        .value;
+
+
+                    const confirmPassword =
+                        document.getElementById(
+                            "signupConfirmPassword"
+                        ).value;
+
+
+
+                    // =====================================
+                    // CLIENT-SIDE VALIDATION
+                    // =====================================
+
+                    if (name.length < 2) {
+
+                        showSignupMessage(
+                            "Please enter a valid name.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (password.length < 6) {
+
+                        showSignupMessage(
+                            "Password must contain at least 6 characters.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (password !== confirmPassword) {
+
+                        showSignupMessage(
+                            "Passwords do not match.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (
+                        typeof window.supabaseClient ===
+                        "undefined"
+                    ) {
+
+                        showSignupMessage(
+                            "Supabase is not configured correctly. Check supabase-config.js.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    // =====================================
+                    // START SIGNUP
+                    // =====================================
+
+                    setLoadingState(true);
+
+                    showSignupMessage(
+                        "Creating your account...",
+                        "success"
+                    );
+
+
+                    try {
+
+                        const {
+                            data,
+                            error
+                        } =
+                            await window.supabaseClient.auth.signUp({
+
+                                email: email,
+
+                                password: password,
+
+                                options: {
+
+                                    data: {
+
+                                        full_name: name
+
+                                    }
+
+                                }
+
+                            });
+
+
+
+                        if (error) {
+
+                            throw error;
+
+                        }
+
+
+
+                        // =================================
+                        // CHECK SIGNUP RESULT
+                        // =================================
+
+                        if (!data || !data.user) {
+
+                            throw new Error(
+                                "Account creation failed. Please try again."
+                            );
+
+                        }
+
+
+
+                        // =================================
+                        // INSERT PROFILE RECORD
+                        // =================================
+
+                        /*
+                         * This requires a profiles table with
+                         * columns such as:
+                         *
+                         * id
+                         * name
+                         * email
+                         *
+                         * The id must match auth.users.id.
+                         */
+
+                        if (data.session && data.user) {
+
+                            const {
+                                error: profileError
+                            } =
+                                await window.supabaseClient
+                                .from("profiles")
+                                .upsert({
+
+                                    id: data.user.id,
+
+                                    name: name,
+
+                                    email: email
+
+                                });
+
+
+                            if (profileError) {
+
+                                console.warn(
+                                    "Profile creation warning:",
+                                    profileError
+                                );
+
+                            }
+
+                        }
+
+
+
+                        // =================================
+                        // EMAIL CONFIRMATION REQUIRED
+                        // =================================
+
+                        if (!data.session) {
+
+                            showSignupMessage(
+                                "Account created successfully. Please check your email to confirm your account, then log in.",
+                                "success"
+                            );
+
+                        } else {
+
+                            showSignupMessage(
+                                "Account created successfully. Redirecting to login...",
+                                "success"
+                            );
+
+                        }
+
+
+                        signupForm.reset();
+
+
+
+                        setTimeout(function () {
+
+                            window.location.href =
+                                "login.html";
+
+                        }, 2500);
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Supabase signup error:",
+                            error
+                        );
+
+
+                        showSignupMessage(
+                            getReadableSignupError(error),
+                            "error"
+                        );
+
+
+                        setLoadingState(false);
+
+                    }
+
+                }
+            );
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

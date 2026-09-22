@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentLens - My Profile</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/redesign.css">
+</head>
+
+<body>
+
+    <!-- ==============================
+         NAVIGATION
+         ============================== -->
+
+    <header class="site-header">
+
+        <nav class="nav-container">
+
+            <a href="../index.html" class="logo">
+                <span>StudentLens</span>
+            </a>
+
+            <div class="main-nav">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="colleges.html">
+                    Colleges
+                </a>
+
+                <a href="compare.html">
+                    Compare
+                </a>
+
+                <a href="ai-advisor.html">
+                    AI Advisor
+                </a>
+
+                <a href="saved-colleges.html">
+                    Saved Colleges
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+                <a href="profile.html">
+                    Profile
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-link">
+                    Login
+                </a>
+
+                <a href="signup.html" class="nav-button">
+                    Get Started
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==============================
+         PROFILE SECTION
+         ============================== -->
+
+    <main>
+
+        <section class="features login-section profile-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-eyebrow">
+                        YOUR ACCOUNT
+                    </span>
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p class="login-subtitle">
+                        Manage your academic preferences and college interests.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="login-card profile-card">
+
+                <!-- Account Email -->
+
+                <div class="form-group">
+
+                    <label for="profileEmail">
+                        Account Email
+                    </label>
+
+                    <input type="email" id="profileEmail" placeholder="Your account email" readonly>
+
+                    <small>
+                        Your account email cannot be changed here.
+                    </small>
+
+                </div>
+
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+
+                    <label for="profileName">
+                        Full Name
+                    </label>
+
+                    <input type="text" id="profileName" placeholder="Enter your full name" required>
+
+                </div>
+
+
+                <!-- Preferred Course -->
+
+                <div class="form-group">
+
+                    <label for="profileCourse">
+                        Preferred Course
+                    </label>
+
+                    <input type="text" id="profileCourse" placeholder="Example: Information Technology">
+
+                </div>
+
+
+                <!-- Preferred Location -->
+
+                <div class="form-group">
+
+                    <label for="profileLocation">
+                        Preferred Location
+                    </label>
+
+                    <input type="text" id="profileLocation" placeholder="Example: Vijayawada">
+
+                </div>
+
+
+                <!-- Maximum Budget -->
+
+                <div class="form-group">
+
+                    <label for="profileBudget">
+                        Maximum College Fees
+                    </label>
+
+                    <select id="profileBudget">
+
+                        <option value="">
+                            Select Budget
+                        </option>
+
+                        <option value="1">
+                            Below ₹1 Lakh
+                        </option>
+
+                        <option value="2">
+                            ₹1 - ₹2 Lakhs
+                        </option>
+
+                        <option value="3">
+                            ₹2 - ₹3 Lakhs
+                        </option>
+
+                        <option value="4">
+                            Above ₹3 Lakhs
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Main Priority -->
+
+                <div class="form-group">
+
+                    <label for="profilePriority">
+                        Main Priority
+                    </label>
+
+                    <select id="profilePriority">
+
+                        <option value="">
+                            Select Priority
+                        </option>
+
+                        <option value="fees">
+                            Lower Fees
+                        </option>
+
+                        <option value="placement">
+                            Better Placements
+                        </option>
+
+                        <option value="rating">
+                            College Rating
+                        </option>
+
+                        <option value="location">
+                            Location
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Action Buttons -->
+
+                <div class="profile-actions">
+
+                    <button type="button" class="primary login-button" onclick="saveProfile()">
+                        Save Profile
+                    </button>
+
+                    <button type="button" class="secondary login-button" onclick="clearProfile()">
+                        Clear Profile
+                    </button>
+
+                </div>
+
+
+                <!-- Status Message -->
+
+                <p id="profileStatus" class="profile-status" role="status" aria-live="polite"></p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         FOOTER
+         ============================== -->
+
+    <section class="bottom">
+
+        <h2>
+            Your preferences. Your journey.
+        </h2>
+
+        <p>
+            StudentLens — Compare. Discover. Decide.
+        </p>
+
+    </section>
+
+
+    <!-- ==============================
+         SCRIPTS
+         ============================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase-config.js"></script>
+    <script src="../script.js"></script>
+
+
+    <script>
+
+        /*
+         * Display a profile status message.
+         */
+
+        function showProfileStatus(message, isError = false) {
+
+            const statusElement =
+                document.getElementById("profileStatus");
+
+            if (!statusElement) {
+                return;
+            }
+
+            statusElement.textContent = message;
+
+            statusElement.style.color = isError
+                ? "#dc2626"
+                : "#16a34a";
+
+        }
+
+
+        /*
+         * Get the currently logged-in Supabase user.
+         */
+
+        async function getProfileUser() {
+
+            if (!window.supabaseClient) {
+                return null;
+            }
+
+            const { data, error } =
+                await supabaseClient.auth.getUser();
+
+            if (error) {
+                console.error(
+                    "Profile user error:",
+                    error
+                );
+
+                return null;
+            }
+
+            return data.user;
+
+        }
+
+
+        /*
+         * Load the user's profile from Supabase.
+         */
+
+        async function loadProfile() {
+
+            try {
+
+                const user = await getProfileUser();
+
+                if (!user) {
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                const emailInput =
+                    document.getElementById("profileEmail");
+
+                if (emailInput) {
+                    emailInput.value = user.email || "";
+                }
+
+
+                const { data, error } =
+                    await supabaseClient
+                        .from("profiles")
+                        .select("*")
+                        .eq("user_id", user.id)
+                        .maybeSingle();
+
+
+                if (error) {
+
+                    console.error(
+                        "Load profile error:",
+                        error
+                    );
+
+                    showProfileStatus(
+                        "Unable to load your profile.",
+                        true
+                    );
+
+                    return;
+                }
+
+
+                if (!data) {
+                    showProfileStatus(
+                        "Create your profile by entering your details."
+                    );
+
+                    return;
+                }
+
+
+                document.getElementById("profileName").value =
+                    data.full_name || "";
+
+                document.getElementById("profileCourse").value =
+                    data.course || "";
+
+                document.getElementById("profileLocation").value =
+                    data.location || "";
+
+                document.getElementById("profileBudget").value =
+                    data.budget || "";
+
+                document.getElementById("profilePriority").value =
+                    data.priority || "";
+
+
+                showProfileStatus(
+                    "Your profile has been loaded."
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Load profile error:",
+                    error
+                );
+
+                showProfileStatus(
+                    "Something went wrong while loading your profile.",
+                    true
+                );
+
+            }
+
+        }
+
+
+        /*
+         * Save or update the user's profile.
+         */
+
+        async function saveProfile() {
+
+            try {
+
+                const user = await getProfileUser();
+
+                if (!user) {
+
+                    alert("Please log in to save your profile.");
+
+                    window.location.href = "login.html";
+
+                    return;
+                }
+
+
+                const fullName =
+                    document.getElementById("profileName")
+                        .value
+                        .trim();
+
+                const course =
+                    document.getElementById("profileCourse")
+                        .value
+                        .trim();
+
+                const location =
+                    document.getElementById("profileLocation")
+                        .value
+                        .trim();
+
+                const budget =
+                    document.getElementById("profileBudget")
+                        .value;
+
+                const priority =
+                    document.getElementById("profilePriority")
+                        .value;
+
+
+                if (!fullName) {
+
+                    showProfileStatus(
+                        "Please enter your full name.",
+                        true
+                    );
+
+                    return;
+                }
+
+
+                const profileData = {
+
+                    user_id: user.id,
+
+                    full_name: fullName,
+
+                    course: course || null,
+
+                    location: location || null,
+
+                    budget: budget || null,
+
+                    priority: priority || null
+
+                };
+
+
+                const { error } =
+                    await supabaseClient
+                        .from("profiles")
+                        .upsert(
+                            profileData,
+                            {
+                                onConflict: "user_id"
+                            }
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Save profile error:",
+                        error
+                    );
+
+                    showProfileStatus(
+                        "Unable to save your profile. Check the Console for details.",
+                        true
+                    );
+
+                    return;
+                }
+
+
+                /*
+                 * Keep the compatibility user data updated.
+                 */
+
+                const existingUserData =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "studentLensLoggedInUser"
+                        ) || "{}"
+                    );
+
+
+                localStorage.setItem(
+                    "studentLensLoggedInUser",
+                    JSON.stringify({
+
+                        ...existingUserData,
+
+                        id: user.id,
+
+                        name: fullName,
+
+                        email: user.email
+
+                    })
+                );
+
+
+                showProfileStatus(
+                    "Profile saved successfully."
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Save profile error:",
+                    error
+                );
+
+                showProfileStatus(
+                    "Something went wrong while saving your profile.",
+                    true
+                );
+
+            }
+
+        }
+
+
+        /*
+         * Clear the profile form.
+         *
+         * This clears the form fields only.
+         * It does not delete the Supabase profile.
+         */
+
+        function clearProfile() {
+
+            document.getElementById("profileName").value = "";
+
+            document.getElementById("profileCourse").value = "";
+
+            document.getElementById("profileLocation").value = "";
+
+            document.getElementById("profileBudget").value = "";
+
+            document.getElementById("profilePriority").value = "";
+
+            showProfileStatus(
+                "Form cleared. Click Save Profile to save changes."
+            );
+
+        }
+
+
+        /*
+         * Initialize the Profile page.
+         */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                if (
+                    typeof updateAuthenticationUI ===
+                    "function"
+                ) {
+
+                    await updateAuthenticationUI();
+
+                }
+
+                await loadProfile();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
